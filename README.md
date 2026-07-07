@@ -1,44 +1,28 @@
-# Thrivo Web Frontend
+# Thrivo Frontend
 
-[![Web Client](https://img.shields.io/badge/Stack-React%20%7C%20Vite-blue.svg?logo=react&logoColor=white)](https://react.dev)
-[![Platform](https://img.shields.io/badge/Platform-Web%20(Responsive)-lightgrey.svg)](#)
-[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#)
-
-Welcome to the frontend repository for the **Thrivo Web Application** — a secure, high-trust, multi-sided discovery ecosystem built to democratize and secure the entrepreneurial journey. 
-
-This repository specifically hosts the web client interface (optimized for desktop, tablet, and mobile browsers).
+Welcome to the frontend repository for the Thrivo ecosystem. The frontend contains two native client layers optimized for distinct interaction densities: a dense data-driven Web Application and a rapid-interaction mobile client.
 
 ---
 
-## Key Web Frontend Features (MVP)
+## Client Layers Stack
 
-1. **Polymorphic Onboarding & Profile Engine**
-   - Seamless onboarding flow branching dynamically based on user identity flags: **Founder/SMB**, **Creator/Influencer**, or **Investor**.
-   - Custom dashboards and layouts tailored for each role (e.g., pitch deck viewer for investors, grid storefront for founders, media portfolio for creators).
+### 1. Web Client Layer (Next.js 15)
+- **Core Technologies:** Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui.
+- **Architectural Justification:** Server-Side Rendering (SSR) maximizes the SEO discoverability index score for public-facing creator portfolios and founder launch campaigns.
 
-2. **High-Performance Discovery Feed**
-   - Fluid, vertical scrolling web video/image feed (similar to Reels) showcasing products and startup pitches.
-   - Low-latency multi-tenant search and filter systems.
-
-3. **Secure Transaction UI & Checkout**
-   - Embedded Razorpay web checkout client for zero-friction native purchases.
-   - Milestone progress tracking panels with escrow status visualization.
-
-4. **Real-Time Interaction Layer**
-   - Web-based chat interfaces for direct negotiation between stakeholder roles.
-   - Web push notifications for instant matches and deal inquiries.
+### 2. Mobile Client Layer (React Native & Expo)
+- **Core Technologies:** React Native, Expo, Shopify's FlashList, MMKV Local Memory Storage.
+- **Architectural Justification:** Cross-platform native thread performance. Shopify's FlashList handles intense dynamic recycling of video asset cells to maintain 60FPS fluid navigation. MMKV provides high-speed, secure local memory storage for JWT renewal keys.
 
 ---
 
-## Technology Stack
+## Low-Latency System Security Strategy
 
-- **Framework:** React / Vite (or Next.js)
-- **Styling:** Vanilla CSS / Modern CSS Variables (Custom Design System)
-- **State Management:** Redux Toolkit / React Context
-- **Real-Time Messaging:** Socket.io client bindings
-- **Analytics:** Mixpanel SDK, Firebase Analytics
-- **Payments:** Razorpay Web Checkout Integration
-- **Push Alerts:** Web Push API / Firebase Cloud Messaging (FCM)
+### Biometric Access & Token Control Loop
+Client communication cycles rely on dual JWT configurations (short-lived access parameters with a lifespan of 15 minutes alongside a sliding renewal token expiring in 7 days). On mobile layers, renewal keys are sealed natively within hardware-encrypted secure storage blocks triggered by biometric authentication signatures (iOS FaceID / Android BiometricPrompt APIs).
+
+### Creator Likeness Digital Signature Verification
+To prevent generative identity exploitation or unauthorized duplication of promotional media assets, every piece of video material uploaded by verified creators undergoes server-side frame analysis and receives a metadata-injected cryptographic watermarking footprint using SHA-256 block chains before propagation across CDN edge caches.
 
 ---
 
@@ -46,24 +30,25 @@ This repository specifically hosts the web client interface (optimized for deskt
 
 ```
 thrivo-frontend/
-├── public/                   # Static assets, fonts, icons
-├── src/                      # React source code
-│   ├── main.jsx              # Web application entry point
-│   ├── App.jsx               # Root component and router
-│   ├── assets/               # Local images and icons
-│   ├── components/           # Reusable UI components (buttons, cards, badges)
-│   ├── context/              # Context providers (auth state, themes)
-│   ├── styles/               # Global vanilla CSS files and modern design system tokens
-│   ├── utils/                # Helper functions and web security adapters
-│   └── features/             # Feature-based modular structure
-│       ├── auth/             # Onboarding, Login, and Registration
-│       ├── discovery/        # Video discovery feed and search filters
-│       ├── profile/          # Polymorphic profiles (Founder, Investor, Creator)
-│       ├── chat/             # Direct messaging and Socket.io client integration
-│       └── escrow/           # Escrow transaction status and milestone tracking
-├── index.html                # Main HTML entry point
-├── vite.config.js            # Vite build configuration
-└── package.json              # Web dependencies and build scripts
+├── web/                      # Web application (Next.js 15)
+│   ├── app/                  # Next.js App Router (pages & layouts)
+│   │   ├── layout.tsx        # Global Layout
+│   │   ├── page.tsx          # Homepage
+│   │   ├── dashboard/        # Dashboards (Founders, Creators, Investors)
+│   │   ├── discovery/        # Video discovery feed and search filters
+│   │   └── escrow/           # Escrow transaction status and milestone tracking
+│   ├── components/           # UI components (shadcn/ui elements, buttons, cards)
+│   ├── hooks/                # Custom React Hooks
+│   ├── styles/               # Global CSS files and Tailwind configurations
+│   ├── next.config.ts        # Next.js configuration
+│   └── tailwind.config.ts    # Tailwind CSS configuration
+│
+├── mobile/                   # Mobile application (React Native / Expo)
+│   ├── app/                  # Expo Router directory
+│   ├── components/           # Mobile native UI components
+│   ├── hooks/                # Custom native Hooks
+│   ├── storage/              # MMKV secure local key-value storage setup
+│   └── app.json              # Expo configuration
 ```
 
 ---
@@ -73,7 +58,7 @@ thrivo-frontend/
 ### Prerequisites
 
 - Node.js (v20.x or later)
-- npm or yarn
+- Expo Go application on mobile devices (for testing the mobile client)
 
 ### Installation
 
@@ -83,29 +68,16 @@ thrivo-frontend/
    cd thrivo-frontend
    ```
 
-2. Install dependencies:
+2. Web Client Development:
    ```bash
+   cd web
    npm install
-   ```
-
-3. Set up environment variables:
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_THRIVO_BACKEND_URL=https://api.thrivo.ambixion.corp
-   VITE_SUPABASE_URL=https://your-supabase-project.supabase.co
-   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-   ```
-
-4. Run the application locally in development mode:
-   ```bash
    npm run dev
    ```
 
----
-
-## Design System & Aesthetics
-
-Thrivo's UI focuses on premium aesthetics:
-- **Color Palette:** Sleek dark-mode oriented palette with modern gradients.
-- **Typography:** Using highly readable modern sans-serif typefaces (e.g., Outfit, Inter).
-- **Feedback & Micro-animations:** Responsive hover effects, smooth swipe gestures, and tactile feedback.
+3. Mobile Client Development:
+   ```bash
+   cd mobile
+   npm install
+   npx expo start
+   ```

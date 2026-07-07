@@ -1,5 +1,10 @@
 # Thrivo Frontend
 
+[![Web Client](https://img.shields.io/badge/Web-Next.js%2015%20%7C%20React%2019-blue.svg?logo=nextdotjs&logoColor=white)](#)
+[![Mobile Client](https://img.shields.io/badge/Mobile-React%20Native%20%7C%20Expo-green.svg?logo=react&logoColor=white)](#)
+[![Styling](https://img.shields.io/badge/Styling-Tailwind%20CSS-blueviolet.svg?logo=tailwindcss&logoColor=white)](#)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#)
+
 Welcome to the frontend repository for the Thrivo ecosystem. The frontend contains two native client layers optimized for distinct interaction densities: a dense data-driven Web Application and a rapid-interaction mobile client.
 
 ---

@@ -1,4 +1,4 @@
-# Thrivo Web Frontend 🚀
+# Thrivo Web Frontend
 
 [![Web Client](https://img.shields.io/badge/Stack-React%20%7C%20Vite-blue.svg?logo=react&logoColor=white)](https://react.dev)
 [![Platform](https://img.shields.io/badge/Platform-Web%20(Responsive)-lightgrey.svg)](#)
@@ -10,7 +10,7 @@ This repository specifically hosts the web client interface (optimized for deskt
 
 ---
 
-## 📱 Key Web Frontend Features (MVP)
+## Key Web Frontend Features (MVP)
 
 1. **Polymorphic Onboarding & Profile Engine**
    - Seamless onboarding flow branching dynamically based on user identity flags: **Founder/SMB**, **Creator/Influencer**, or **Investor**.
@@ -30,7 +30,7 @@ This repository specifically hosts the web client interface (optimized for deskt
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Framework:** React / Vite (or Next.js)
 - **Styling:** Vanilla CSS / Modern CSS Variables (Custom Design System)
@@ -42,7 +42,7 @@ This repository specifically hosts the web client interface (optimized for deskt
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 thrivo-frontend/
@@ -68,7 +68,7 @@ thrivo-frontend/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -103,7 +103,7 @@ thrivo-frontend/
 
 ---
 
-## 🎨 Design System & Aesthetics
+## Design System & Aesthetics
 
 Thrivo's UI focuses on premium aesthetics:
 - **Color Palette:** Sleek dark-mode oriented palette with modern gradients.

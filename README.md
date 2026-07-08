@@ -1,88 +1,79 @@
-# Thrivo Frontend
+# Thrivo Core App (Frontend) 🚀
 
-[![Web Client](https://img.shields.io/badge/Web-Next.js%2015%20%7C%20React%2019-blue.svg?logo=nextdotjs&logoColor=white)](#)
-[![Mobile Client](https://img.shields.io/badge/Mobile-React%20Native%20%7C%20Expo-green.svg?logo=react&logoColor=white)](#)
-[![Styling](https://img.shields.io/badge/Styling-Tailwind%20CSS-blueviolet.svg?logo=tailwindcss&logoColor=white)](#)
-[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](#)
+![Thrivo Header](https://via.placeholder.com/1200x400/0A0A0A/00C6D8?text=Thrivo:+The+OS+for+Entrepreneurship)
 
-Welcome to the frontend repository for the Thrivo ecosystem. The frontend contains two native client layers optimized for distinct interaction densities: a dense data-driven Web Application and a rapid-interaction mobile client.
+> **Thrivo** is a horizontal ecosystem designed to solve "founder tool fatigue" by unifying the startup journey end-to-end. It seamlessly connects builders (founders), marketers (creators), funders (investors), and buyers (consumers) under one roof.
 
----
+## 🏗 Phase 1 MVP
 
-## Client Layers Stack
+This repository contains the Next.js 15 web client. The current iteration focuses on the core **Phase 1 MVP**, solving discovery and networking in the startup ecosystem:
 
-### 1. Web Client Layer (Next.js 15)
-- **Core Technologies:** Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui.
-- **Architectural Justification:** Server-Side Rendering (SSR) maximizes the SEO discoverability index score for public-facing creator portfolios and founder launch campaigns.
+1. **Startup Discovery Feed**: A highly visual, infinite-scrolling feed (TikTok-style) for discovering new startups, pitches, and products.
+2. **Founder Profiles**: Detailed portfolios showcasing a founder's past ventures, traction metrics, and current projects using a striking Bento Grid layout.
+3. **Startup Portfolios**: Data-rich startup profiles featuring **Tiered Privacy** (locking sensitive financial metrics behind an investor NDA wall).
+4. **Investor Matching**: An interactive directory allowing founders to instantly filter and discover VCs and Angel syndicates by stage and sector.
 
-### 2. Mobile Client Layer (React Native & Expo)
-- **Core Technologies:** React Native, Expo, Shopify's FlashList, MMKV Local Memory Storage.
-- **Architectural Justification:** Cross-platform native thread performance. Shopify's FlashList handles intense dynamic recycling of video asset cells to maintain 60FPS fluid navigation. MMKV provides high-speed, secure local memory storage for JWT renewal keys.
+## 💻 Tech Stack & Infrastructure
 
----
+We utilize a decoupled, high-performance modern web stack. **We prioritize free tiers, open-source libraries, and cost-effective solutions** across all architectural decisions to maintain a lean infrastructure:
 
-## Low-Latency System Security Strategy
+- **Framework**: Next.js 15 (App Router) & React 19
+- **Styling**: Tailwind CSS & custom glassmorphic CSS tokens (`globals.css`)
+- **UI Components**: `lucide-react` (free open-source icons) and `shadcn/ui`.
+- **Auth & Backend-as-a-Service**: [Supabase](https://supabase.com/) (leveraging the open-source ecosystem and generous free tier).
+- **State Management**:
+  - **Server State:** TanStack Query (`@tanstack/react-query`) for asynchronous data, caching, and infinite scroll logic.
+  - **Local State:** React `useState` & `useMemo` (Zustand for complex global UI state).
+  - _Note: Redux is strictly prohibited in this architecture._
 
-### Biometric Access & Token Control Loop
-Client communication cycles rely on dual JWT configurations (short-lived access parameters with a lifespan of 15 minutes alongside a sliding renewal token expiring in 7 days). On mobile layers, renewal keys are sealed natively within hardware-encrypted secure storage blocks triggered by biometric authentication signatures (iOS FaceID / Android BiometricPrompt APIs).
+## 📐 Architecture & Principles
 
-### Creator Likeness Digital Signature Verification
-To prevent generative identity exploitation or unauthorized duplication of promotional media assets, every piece of video material uploaded by verified creators undergoes server-side frame analysis and receives a metadata-injected cryptographic watermarking footprint using SHA-256 block chains before propagation across CDN edge caches.
+We strictly adhere to masterclass-level frontend engineering principles:
 
----
+- **Domain-Driven UI**: Components and logic are grouped by business domain (e.g., `src/features/feed`, `src/features/founders`) rather than monolithic folders.
+- **Strict Frontend/Backend Separation**: This repository strictly contains frontend code. Backend services are decoupled to avoid merge conflicts and enforce clear API boundaries.
+- **Performance First**: Heavy reliance on CSS transforms/opacity for 60fps animations. Avoidance of layout-thrashing animations.
+- **Premium Aesthetics**: The UI strictly follows the "Dark Luxury" and "Glassmorphism" design paradigms. We prioritize dark backgrounds, high-contrast cyan/lime gradients (`#00C6D8` to `#8DEE5F`), and immersive UI patterns.
 
-## Repository Structure
+## 📂 Directory Structure
 
+```text
+src/
+├── app/                  # Next.js App Router (Pages & Layouts)
+│   ├── (auth)/           # Authentication (Supabase integration)
+│   ├── founders/         # Founder Directory & Dynamic Profiles
+│   ├── investors/        # Investor Matching Portal
+│   ├── startups/         # Startup Portfolios
+│   └── page.tsx          # Startup Discovery Feed (Home)
+├── components/           # Global Shared UI Components (Shell, Sidebar, Nav)
+├── features/             # Domain-Driven Feature Modules
+│   ├── feed/             # Infinite Scroll Feed logic & components
+│   ├── founders/         # Founder Bento Grid, Headers, API mocks
+│   ├── investors/        # Investor Cards, Filtering logic, API mocks
+│   └── startups/         # Tiered-privacy Metrics Panels, Hero components
+├── lib/                  # Utilities and clients (e.g., Supabase client)
+├── providers/            # React Context Providers (TanStack Query)
+└── styles/               # Global CSS & Tailwind configuration
 ```
-thrivo-frontend/
-├── web/                      # Web application (Next.js 15)
-│   ├── app/                  # Next.js App Router (pages & layouts)
-│   │   ├── layout.tsx        # Global Layout
-│   │   ├── page.tsx          # Homepage
-│   │   ├── dashboard/        # Dashboards (Founders, Creators, Investors)
-│   │   ├── discovery/        # Video discovery feed and search filters
-│   │   └── escrow/           # Escrow transaction status and milestone tracking
-│   ├── components/           # UI components (shadcn/ui elements, buttons, cards)
-│   ├── hooks/                # Custom React Hooks
-│   ├── styles/               # Global CSS files and Tailwind configurations
-│   ├── next.config.ts        # Next.js configuration
-│   └── tailwind.config.ts    # Tailwind CSS configuration
-│
-├── mobile/                   # Mobile application (React Native / Expo)
-│   ├── app/                  # Expo Router directory
-│   ├── components/           # Mobile native UI components
-│   ├── hooks/                # Custom native Hooks
-│   ├── storage/              # MMKV secure local key-value storage setup
-│   └── app.json              # Expo configuration
+
+## 🚀 Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Data is a mix of live Supabase endpoints and mocked data via the `features/**/api` layers for incomplete backend features.
 
-## Getting Started
+## 🔮 Future Roadmap (Phase 2+)
 
-### Prerequisites
-
-- Node.js (v20.x or later)
-- Expo Go application on mobile devices (for testing the mobile client)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Ambixion-Corp/thrivo-frontend.git
-   cd thrivo-frontend
-   ```
-
-2. Web Client Development:
-   ```bash
-   cd web
-   npm install
-   npm run dev
-   ```
-
-3. Mobile Client Development:
-   ```bash
-   cd mobile
-   npm install
-   npx expo start
-   ```
+- **Creator Marketplace**: Affiliate loops for creators promoting vetted products.
+- **Consumer Marketplace**: Native storefronts allowing users to buy products directly from the discovery feed.
+- **Backend Integration**: Swap out remaining TanStack Query mock APIs for live endpoints from `thrivo-backend` (NestJS/PostgreSQL), once backend development and conflict resolutions are finalized.

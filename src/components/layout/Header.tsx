@@ -1,5 +1,6 @@
-import { Search, Bell, LogIn } from "lucide-react";
+import { Search, LogIn } from "lucide-react";
 import Link from "next/link";
+import { NotificationDropdown } from "./NotificationDropdown";
 
 export function Header() {
   // Temporary auth state for UI purposes
@@ -28,13 +29,7 @@ export function Header() {
 
         <div className="flex items-center gap-x-4 lg:gap-x-6">
           {/* Notifications */}
-          <button
-            type="button"
-            className="-m-2.5 p-2.5 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <span className="sr-only">View notifications</span>
-            <Bell className="h-6 w-6" aria-hidden="true" />
-          </button>
+          <NotificationDropdown />
 
           {/* Separator */}
           <div
@@ -47,7 +42,7 @@ export function Header() {
             <button className="flex items-center p-1.5 focus:outline-none">
               <span className="sr-only">Open user menu</span>
               <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] flex items-center justify-center shadow-inner">
-                 <span className="text-black font-bold text-xs">U</span>
+                <span className="text-black font-bold text-xs">U</span>
               </div>
             </button>
           ) : (

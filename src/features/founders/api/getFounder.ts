@@ -21,17 +21,19 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s1",
         name: "Thrivo",
-        description: "The unified platform connecting founders, creators, investors, and consumers.",
+        description:
+          "The unified platform connecting founders, creators, investors, and consumers.",
         role: "Founder & CEO",
         status: "Active",
         metrics: {
           raised: "$4.5M",
-        }
+        },
       },
       {
         id: "s2",
         name: "Ambixion Corp",
-        description: "Parent company incubating next-gen startup infrastructure.",
+        description:
+          "Parent company incubating next-gen startup infrastructure.",
         role: "Founder",
         status: "Active",
       },
@@ -43,9 +45,9 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
         status: "Acquired",
         metrics: {
           arr: "$2M+",
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   "2": {
     id: "2",
@@ -65,16 +67,17 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s4",
         name: "NeuralDev",
-        description: "AI pair programmer that understands your entire codebase context.",
+        description:
+          "AI pair programmer that understands your entire codebase context.",
         role: "CEO & Co-founder",
         status: "Active",
         metrics: {
           users: "10,000+",
-          raised: "$2M"
-        }
-      }
-    ]
-  }
+          raised: "$2M",
+        },
+      },
+    ],
+  },
 };
 
 /**
@@ -86,7 +89,7 @@ export async function getFounderById(id: string): Promise<Founder> {
   await new Promise((resolve) => setTimeout(resolve, delay));
 
   const founder = MOCK_FOUNDERS[id];
-  
+
   if (!founder) {
     throw new Error("Founder not found");
   }
@@ -100,6 +103,6 @@ export async function getFounderById(id: string): Promise<Founder> {
 export async function getFeaturedFounders(): Promise<Founder[]> {
   const delay = Math.floor(Math.random() * 800) + 400;
   await new Promise((resolve) => setTimeout(resolve, delay));
-  
+
   return Object.values(MOCK_FOUNDERS);
 }

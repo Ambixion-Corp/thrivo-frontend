@@ -5,19 +5,20 @@ import { getFeed } from "../api/getFeed";
 import { FeedCard } from "./FeedCard";
 import { useEffect, useRef } from "react";
 
-export function Feed() {
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
-    queryKey: ["feed"],
-    queryFn: ({ pageParam = 0 }) => getFeed(pageParam),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
-  });
+import { UserRole } from "../types";
+
+interface FeedProps {
+  role?: UserRole;
+}
+
+export function Feed({ role = "founder" }: FeedProps) {
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
+    useInfiniteQuery({
+      queryKey: ["feed", role],
+      queryFn: ({ pageParam = 0 }) => getFeed(pageParam, role),
+      initialPageParam: 0,
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    });
 
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +29,7 @@ export function Feed() {
           fetchNextPage();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (loadMoreRef.current) {
@@ -58,18 +59,26 @@ export function Feed() {
     <div className="h-[calc(100vh-4rem)] lg:h-[calc(100vh-4rem)] w-full overflow-y-auto snap-y snap-mandatory pb-24 scroll-smooth">
       <div className="flex flex-col items-center py-6 sm:py-8 gap-8 lg:gap-12">
         {data.pages.map((page, pageIndex) => (
-          <div key={pageIndex} className="flex flex-col gap-8 lg:gap-12 w-full contents">
+          <div
+            key={pageIndex}
+            className="flex flex-col gap-8 lg:gap-12 w-full contents"
+          >
             {page.items.map((item) => (
-              <FeedCard key={item.id} item={item} />
+              <FeedCard key={item.id} item={item} role={role} />
             ))}
           </div>
         ))}
-        
-        <div ref={loadMoreRef} className="h-20 w-full flex items-center justify-center snap-center">
+
+        <div
+          ref={loadMoreRef}
+          className="h-20 w-full flex items-center justify-center snap-center"
+        >
           {isFetchingNextPage ? (
             <div className="h-8 w-8 rounded-full border-4 border-muted border-t-[#00C6D8] animate-spin" />
           ) : !hasNextPage ? (
-            <p className="text-muted-foreground text-sm font-medium">You've reached the end!</p>
+            <p className="text-muted-foreground text-sm font-medium">
+              You&apos;ve reached the end!
+            </p>
           ) : null}
         </div>
       </div>

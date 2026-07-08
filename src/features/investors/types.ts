@@ -1,5 +1,6 @@
 export type InvestmentStage = "Pre-seed" | "Seed" | "Series A" | "Series B+";
-export type InvestmentSector = "AI" | "SaaS" | "Fintech" | "Consumer" | "DeepTech";
+export type InvestmentSector =
+  "AI" | "SaaS" | "Fintech" | "Consumer" | "DeepTech";
 
 export interface Investor {
   id: string;

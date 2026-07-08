@@ -27,17 +27,15 @@ export function AuthCard({
         <h1 className="text-3xl font-bold tracking-tight text-foreground mb-2">
           {title}
         </h1>
-        <p className="text-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </div>
 
       {children}
 
       <div className="mt-8 text-center text-sm text-muted-foreground">
         {footerText}{" "}
-        <Link 
-          href={footerLinkHref} 
+        <Link
+          href={footerLinkHref}
           className="font-semibold text-[#00C6D8] hover:text-[#8DEE5F] transition-colors"
         >
           {footerLinkText}

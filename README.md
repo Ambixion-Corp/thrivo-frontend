@@ -17,23 +17,23 @@ This repository contains the Next.js 15 web client. The current iteration focuse
 
 We utilize a decoupled, high-performance modern web stack. **We prioritize free tiers, open-source libraries, and cost-effective solutions** across all architectural decisions to maintain a lean infrastructure:
 
-*   **Framework**: Next.js 15 (App Router) & React 19
-*   **Styling**: Tailwind CSS & custom glassmorphic CSS tokens (`globals.css`)
-*   **UI Components**: `lucide-react` (free open-source icons) and `shadcn/ui`.
-*   **Auth & Backend-as-a-Service**: [Supabase](https://supabase.com/) (leveraging the open-source ecosystem and generous free tier).
-*   **State Management**: 
-    *   **Server State:** TanStack Query (`@tanstack/react-query`) for asynchronous data, caching, and infinite scroll logic.
-    *   **Local State:** React `useState` & `useMemo` (Zustand for complex global UI state).
-    *   *Note: Redux is strictly prohibited in this architecture.*
+- **Framework**: Next.js 15 (App Router) & React 19
+- **Styling**: Tailwind CSS & custom glassmorphic CSS tokens (`globals.css`)
+- **UI Components**: `lucide-react` (free open-source icons) and `shadcn/ui`.
+- **Auth & Backend-as-a-Service**: [Supabase](https://supabase.com/) (leveraging the open-source ecosystem and generous free tier).
+- **State Management**:
+  - **Server State:** TanStack Query (`@tanstack/react-query`) for asynchronous data, caching, and infinite scroll logic.
+  - **Local State:** React `useState` & `useMemo` (Zustand for complex global UI state).
+  - _Note: Redux is strictly prohibited in this architecture._
 
 ## 📐 Architecture & Principles
 
 We strictly adhere to masterclass-level frontend engineering principles:
 
-*   **Domain-Driven UI**: Components and logic are grouped by business domain (e.g., `src/features/feed`, `src/features/founders`) rather than monolithic folders.
-*   **Strict Frontend/Backend Separation**: This repository strictly contains frontend code. Backend services are decoupled to avoid merge conflicts and enforce clear API boundaries.
-*   **Performance First**: Heavy reliance on CSS transforms/opacity for 60fps animations. Avoidance of layout-thrashing animations.
-*   **Premium Aesthetics**: The UI strictly follows the "Dark Luxury" and "Glassmorphism" design paradigms. We prioritize dark backgrounds, high-contrast cyan/lime gradients (`#00C6D8` to `#8DEE5F`), and immersive UI patterns.
+- **Domain-Driven UI**: Components and logic are grouped by business domain (e.g., `src/features/feed`, `src/features/founders`) rather than monolithic folders.
+- **Strict Frontend/Backend Separation**: This repository strictly contains frontend code. Backend services are decoupled to avoid merge conflicts and enforce clear API boundaries.
+- **Performance First**: Heavy reliance on CSS transforms/opacity for 60fps animations. Avoidance of layout-thrashing animations.
+- **Premium Aesthetics**: The UI strictly follows the "Dark Luxury" and "Glassmorphism" design paradigms. We prioritize dark backgrounds, high-contrast cyan/lime gradients (`#00C6D8` to `#8DEE5F`), and immersive UI patterns.
 
 ## 📂 Directory Structure
 
@@ -74,7 +74,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 🔮 Future Roadmap (Phase 2+)
 
-*   **Creator Marketplace**: Affiliate loops for creators promoting vetted products.
-*   **Consumer Marketplace**: Native storefronts allowing users to buy products directly from the discovery feed.
-*   **Backend Integration**: Swap out remaining TanStack Query mock APIs for live endpoints from `thrivo-backend` (NestJS/PostgreSQL), once backend development and conflict resolutions are finalized.
-
+- **Creator Marketplace**: Affiliate loops for creators promoting vetted products.
+- **Consumer Marketplace**: Native storefronts allowing users to buy products directly from the discovery feed.
+- **Backend Integration**: Swap out remaining TanStack Query mock APIs for live endpoints from `thrivo-backend` (NestJS/PostgreSQL), once backend development and conflict resolutions are finalized.

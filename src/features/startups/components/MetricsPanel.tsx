@@ -1,7 +1,7 @@
 "use client";
 
 import { StartupProfile } from "../types";
-import { Lock, Unlock } from "lucide-react";
+import { Lock } from "lucide-react";
 import { useState } from "react";
 
 interface MetricsPanelProps {
@@ -15,12 +15,17 @@ export function MetricsPanel({ startup }: MetricsPanelProps) {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-foreground">Traction & Metrics</h2>
-      
+
       {/* Public Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {startup.publicMetrics.map((metric) => (
-          <div key={metric.label} className="bg-card border border-border rounded-3xl p-5 hover:border-muted-foreground/50 transition-colors">
-            <p className="text-sm font-medium text-muted-foreground mb-1">{metric.label}</p>
+          <div
+            key={metric.label}
+            className="bg-card border border-border rounded-3xl p-5 hover:border-muted-foreground/50 transition-colors"
+          >
+            <p className="text-sm font-medium text-muted-foreground mb-1">
+              {metric.label}
+            </p>
             <p className="text-2xl font-bold text-foreground">{metric.value}</p>
           </div>
         ))}
@@ -29,12 +34,18 @@ export function MetricsPanel({ startup }: MetricsPanelProps) {
       {/* Private/Tiered Metrics Area */}
       <div className="relative rounded-3xl border border-border bg-card overflow-hidden mt-6">
         {/* Blurry Data Layer */}
-        <div className={`grid grid-cols-2 gap-6 p-6 md:p-8 ${!isVerifiedInvestor ? 'blur-md opacity-30 select-none' : ''}`}>
+        <div
+          className={`grid grid-cols-2 gap-6 p-6 md:p-8 ${!isVerifiedInvestor ? "blur-md opacity-30 select-none" : ""}`}
+        >
           {startup.privateMetrics.map((metric) => (
-             <div key={metric.label}>
-               <p className="text-sm font-medium text-muted-foreground mb-1">{metric.label}</p>
-               <p className="text-2xl font-bold text-foreground">{metric.value}</p>
-             </div>
+            <div key={metric.label}>
+              <p className="text-sm font-medium text-muted-foreground mb-1">
+                {metric.label}
+              </p>
+              <p className="text-2xl font-bold text-foreground">
+                {metric.value}
+              </p>
+            </div>
           ))}
         </div>
 
@@ -45,7 +56,9 @@ export function MetricsPanel({ startup }: MetricsPanelProps) {
               <div className="mx-auto h-12 w-12 bg-muted rounded-full flex items-center justify-center mb-4 text-[#00C6D8]">
                 <Lock className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-foreground mb-2">Investor Access Required</h3>
+              <h3 className="text-lg font-bold text-foreground mb-2">
+                Investor Access Required
+              </h3>
               <p className="text-sm text-muted-foreground mb-6">
                 Sensitive growth and financial metrics are locked behind an NDA.
               </p>

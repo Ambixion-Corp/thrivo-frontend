@@ -6,6 +6,10 @@ import {
   CircleDollarSign,
   Globe,
   Settings,
+  MessageSquare,
+  Sparkles,
+  Activity,
+  Package,
 } from "lucide-react";
 
 const navigation = [
@@ -13,7 +17,11 @@ const navigation = [
   { name: "Founders", href: "/founders", icon: Users },
   { name: "Startups", href: "/startups", icon: Briefcase },
   { name: "Investors", href: "/investors", icon: CircleDollarSign },
+  { name: "Creators", href: "/creators", icon: Sparkles },
+  { name: "Messages", href: "/messages", icon: MessageSquare },
   { name: "Network", href: "/network", icon: Globe },
+  { name: "Affiliates", href: "/affiliates", icon: Activity },
+  { name: "My Orders", href: "/orders", icon: Package },
 ];
 
 export function Sidebar() {
@@ -23,7 +31,9 @@ export function Sidebar() {
       <div className="flex h-16 shrink-0 items-center px-6">
         <Link href="/" className="flex items-center gap-2 group">
           <div className="h-8 w-8 rounded-md bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-            <span className="text-black font-bold text-lg leading-none tracking-tighter">T</span>
+            <span className="text-black font-bold text-lg leading-none tracking-tighter">
+              T
+            </span>
           </div>
           <span className="text-xl font-bold tracking-tight text-foreground">
             Thrivo
@@ -52,10 +62,13 @@ export function Sidebar() {
 
       {/* Bottom Actions */}
       <div className="p-4 border-t border-border">
-        <button className="flex w-full items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200">
+        <Link
+          href="/settings"
+          className="flex w-full items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200"
+        >
           <Settings className="h-5 w-5 shrink-0" aria-hidden="true" />
           Settings
-        </button>
+        </Link>
       </div>
     </div>
   );

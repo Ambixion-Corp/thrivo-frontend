@@ -25,35 +25,38 @@ export default function FoundersPage() {
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="rounded-3xl bg-card border border-border p-6 h-48 animate-pulse flex flex-col justify-between">
-               <div className="flex gap-4">
-                 <div className="h-16 w-16 rounded-full bg-muted" />
-                 <div className="space-y-2 flex-1">
-                   <div className="h-5 w-1/2 bg-muted rounded" />
-                   <div className="h-4 w-3/4 bg-muted rounded" />
-                 </div>
-               </div>
-               <div className="h-10 w-full bg-muted rounded-xl mt-4" />
+            <div
+              key={i}
+              className="rounded-3xl bg-card border border-border p-6 h-48 animate-pulse flex flex-col justify-between"
+            >
+              <div className="flex gap-4">
+                <div className="h-16 w-16 rounded-full bg-muted" />
+                <div className="space-y-2 flex-1">
+                  <div className="h-5 w-1/2 bg-muted rounded" />
+                  <div className="h-4 w-3/4 bg-muted rounded" />
+                </div>
+              </div>
+              <div className="h-10 w-full bg-muted rounded-xl mt-4" />
             </div>
           ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {founders?.map((founder) => (
-            <Link 
-              key={founder.id} 
+            <Link
+              key={founder.id}
               href={`/founders/${founder.id}`}
               className="group block rounded-3xl bg-card border border-border shadow-sm p-6 hover:border-[#00C6D8]/50 transition-all duration-300 relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-[#00C6D8]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="flex items-start gap-4 relative">
                 <div className="h-16 w-16 shrink-0 rounded-full bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] p-[2px]">
                   <div className="h-full w-full rounded-full bg-background flex items-center justify-center text-xl font-bold">
                     {founder.name.charAt(0)}
                   </div>
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
                   <h2 className="text-xl font-bold text-foreground truncate group-hover:text-[#00C6D8] transition-colors">
                     {founder.name}

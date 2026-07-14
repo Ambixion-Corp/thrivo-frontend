@@ -26,7 +26,9 @@ const generateMockFeedItems = (page: number, limit: number, role: UserRole) => {
     return {
       id: `feed_${globalIndex}`,
       startupName: `Venture ${globalIndex + 1}`,
+      startupUsername: `@venture${globalIndex + 1}`,
       founderName: `Founder ${(globalIndex % 5) + 1}`,
+      founderUsername: `@founder${(globalIndex % 5) + 1}`,
       founderId: `${(globalIndex % 2) + 1}`, // Linking back to our mocked founders 1 or 2
       oneLiner: `Revolutionizing the way we think about industry ${globalIndex % 10}.`,
       description,
@@ -39,6 +41,8 @@ const generateMockFeedItems = (page: number, limit: number, role: UserRole) => {
       affiliateCommission,
       price,
       ticketSize,
+      imageUrl:
+        globalIndex % 2 === 0 ? "/startup_feed_1.png" : "/startup_feed_2.png",
     };
   });
 };
@@ -48,9 +52,7 @@ export async function getFeed(
   role: UserRole = "founder",
 ): Promise<FeedResponse> {
   const limit = 5;
-  const delay = Math.floor(Math.random() * 800) + 400; // Simulated latency
-
-  await new Promise((resolve) => setTimeout(resolve, delay));
+  // Removed simulated latency for snappy UX
 
   const items = generateMockFeedItems(pageParam, limit, role);
 

@@ -1,6 +1,7 @@
 export interface Startup {
   id: string;
   name: string;
+  username: string;
   logoUrl?: string;
   description: string;
   role: string;
@@ -15,6 +16,7 @@ export interface Startup {
 export interface Founder {
   id: string;
   name: string;
+  username: string;
   headline: string;
   bio: string;
   avatarUrl?: string;
@@ -30,4 +32,6 @@ export interface Founder {
     startupsFounded: number;
   };
   startups: Startup[];
+  hasAccess?: boolean;
+  isPro?: boolean;
 }

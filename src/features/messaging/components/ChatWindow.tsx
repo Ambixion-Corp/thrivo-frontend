@@ -60,21 +60,31 @@ export function ChatWindow({
           </div>
 
           <div>
-            <h2 className="font-bold text-foreground leading-tight">
-              {conversation.participant.name}
-            </h2>
-            <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">
+            <div className="flex items-center gap-2">
+              <h2 className="font-bold text-foreground leading-tight">
+                {conversation.participant.name}
+              </h2>
+              <span className="text-[10px] font-bold text-[#00C6D8] bg-[#00C6D8]/10 px-1.5 py-0.5 rounded-full border border-[#00C6D8]/20">
+                {conversation.participant.username}
+              </span>
+            </div>
+            <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium mt-0.5">
               {conversation.participant.role}
             </p>
           </div>
         </div>
 
-        <Link
-          href={profileLink}
-          className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-[#00C6D8] transition-colors bg-secondary/50 px-3 py-1.5 rounded-full"
-        >
-          View Profile <ExternalLink className="h-3 w-3" />
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href={profileLink}
+            className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground hover:text-foreground transition-colors bg-secondary/50 px-3 py-1.5 rounded-full"
+          >
+            View Profile <ExternalLink className="h-3 w-3" />
+          </Link>
+          <button className="hidden sm:flex items-center gap-2 text-[11px] font-bold text-black bg-gradient-to-r from-[#00C6D8] to-[#8DEE5F] px-4 py-1.5 rounded-full hover:shadow-[0_0_15px_rgba(0,198,216,0.4)] transition-all">
+            Propose Terms
+          </button>
+        </div>
       </div>
 
       {/* Messages Area */}
@@ -88,6 +98,29 @@ export function ChatWindow({
             new Date(msg.timestamp).getTime() -
               new Date(prevMsg.timestamp).getTime() >
               5 * 60 * 1000;
+
+          if (msg.isSystem) {
+            return (
+              <div key={msg.id} className="flex flex-col items-center my-6">
+                <span className="text-[10px] text-muted-foreground font-medium mb-3">
+                  {format(new Date(msg.timestamp), "MMM d, h:mm a")}
+                </span>
+                <div className="bg-secondary/40 border border-[#00C6D8]/20 rounded-2xl p-4 max-w-sm w-full text-center shadow-lg backdrop-blur-md">
+                  <p className="text-sm font-bold text-foreground mb-3">
+                    {msg.text}
+                  </p>
+                  {msg.systemActionUrl && (
+                    <Link
+                      href={msg.systemActionUrl}
+                      className="inline-block w-full rounded-xl bg-foreground text-background py-2.5 text-xs font-bold hover:bg-[#00C6D8] hover:text-black transition-colors"
+                    >
+                      {msg.systemActionText || "View"}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            );
+          }
 
           return (
             <div
@@ -103,7 +136,7 @@ export function ChatWindow({
               <div
                 className={`max-w-[80%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 text-sm ${
                   isMe
-                    ? "bg-gradient-to-br from-[#00C6D8] to-[#0098A6] text-black rounded-tr-sm shadow-md"
+                    ? "bg-gradient-to-br from-[#00C6D8] to-[#0098A6] text-black rounded-tr-sm shadow-md font-medium"
                     : "bg-card border border-border text-foreground rounded-tl-sm shadow-sm"
                 }`}
               >

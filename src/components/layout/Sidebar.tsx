@@ -1,32 +1,30 @@
 import Link from "next/link";
 import {
   Home,
-  Users,
   Briefcase,
   CircleDollarSign,
-  Globe,
   Settings,
   MessageSquare,
   Sparkles,
-  Activity,
-  Package,
+  Bell,
+  PlusSquare,
+  User,
 } from "lucide-react";
 
 const navigation = [
-  { name: "Discovery Feed", href: "/", icon: Home },
-  { name: "Founders", href: "/founders", icon: Users },
+  { name: "Home", href: "/", icon: Home },
   { name: "Startups", href: "/startups", icon: Briefcase },
   { name: "Investors", href: "/investors", icon: CircleDollarSign },
   { name: "Creators", href: "/creators", icon: Sparkles },
   { name: "Messages", href: "/messages", icon: MessageSquare },
-  { name: "Network", href: "/network", icon: Globe },
-  { name: "Affiliates", href: "/affiliates", icon: Activity },
-  { name: "My Orders", href: "/orders", icon: Package },
+  { name: "Notifications", href: "/notifications", icon: Bell },
+  { name: "Create", href: "/add", icon: PlusSquare },
+  { name: "Profile", href: "/profile", icon: User },
 ];
 
 export function Sidebar() {
   return (
-    <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 lg:border-r lg:border-border lg:bg-background/80 lg:backdrop-blur-md">
+    <div className="hidden lg:flex lg:w-64 lg:flex-col lg:sticky lg:top-0 lg:h-screen shrink-0 lg:border-r lg:border-border lg:bg-background/80 lg:backdrop-blur-md">
       {/* Logo Section */}
       <div className="flex h-16 shrink-0 items-center px-6">
         <Link href="/" className="flex items-center gap-2 group">
@@ -48,11 +46,12 @@ export function Sidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className="group flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200"
+              className="group flex items-center gap-x-4 rounded-xl px-3 py-3.5 text-base font-semibold text-foreground hover:bg-secondary/50 transition-all duration-200"
             >
               <item.icon
-                className="h-5 w-5 shrink-0 text-muted-foreground group-hover:text-foreground"
+                className="h-6 w-6 shrink-0 text-foreground group-hover:scale-110 transition-transform duration-200"
                 aria-hidden="true"
+                strokeWidth={1.75}
               />
               {item.name}
             </Link>

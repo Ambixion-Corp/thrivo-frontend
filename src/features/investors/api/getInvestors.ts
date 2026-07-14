@@ -49,7 +49,6 @@ const MOCK_INVESTORS: Investor[] = [
 
 export async function getInvestors(): Promise<Investor[]> {
   const delay = Math.floor(Math.random() * 600) + 300;
-  await new Promise((resolve) => setTimeout(resolve, delay));
 
   return MOCK_INVESTORS;
 }

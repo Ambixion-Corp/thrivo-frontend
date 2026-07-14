@@ -9,6 +9,7 @@ import {
   Target,
   Sparkles,
   ShoppingBag,
+  Crown,
 } from "lucide-react";
 import { ProfileForm } from "./ProfileForm";
 import { PrivacySettings } from "./PrivacySettings";
@@ -16,10 +17,17 @@ import { StartupForm } from "./StartupForm";
 import { InvestorForm } from "./InvestorForm";
 import { CreatorForm } from "./CreatorForm";
 import { ConsumerForm } from "./ConsumerForm";
+import { BillingSettings } from "./BillingSettings";
 
 export function SettingsLayout() {
   const [activeTab, setActiveTab] = useState<
-    "profile" | "startup" | "investor" | "creator" | "consumer" | "privacy"
+    | "profile"
+    | "startup"
+    | "investor"
+    | "creator"
+    | "consumer"
+    | "privacy"
+    | "subscription"
   >("profile");
 
   return (
@@ -88,6 +96,18 @@ export function SettingsLayout() {
           </button>
 
           <button
+            onClick={() => setActiveTab("subscription")}
+            className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all whitespace-nowrap ${
+              activeTab === "subscription"
+                ? "bg-gradient-to-r from-amber-500/20 to-yellow-400/20 text-yellow-500 font-semibold border border-yellow-500/30 shadow-[0_0_20px_rgba(234,179,8,0.2)]"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            }`}
+          >
+            <Crown className="w-5 h-5" />
+            Thrivo Pro
+          </button>
+
+          <button
             onClick={() => setActiveTab("privacy")}
             className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all whitespace-nowrap ${
               activeTab === "privacy"
@@ -106,7 +126,11 @@ export function SettingsLayout() {
         {/* Subtle background glow */}
         <div
           className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none transition-colors duration-1000 -z-10 ${
-            activeTab === "profile" ? "bg-[#00C6D8]/5" : "bg-[#8DEE5F]/5"
+            activeTab === "profile"
+              ? "bg-[#00C6D8]/5"
+              : activeTab === "subscription"
+                ? "bg-yellow-500/10"
+                : "bg-[#8DEE5F]/5"
           }`}
         />
 
@@ -118,6 +142,7 @@ export function SettingsLayout() {
             {activeTab === "creator" && "Creator Portfolio"}
             {activeTab === "consumer" && "Consumer Preferences"}
             {activeTab === "privacy" && "Privacy & Security"}
+            {activeTab === "subscription" && "Billing & Subscription"}
           </h2>
           <p className="text-muted-foreground mt-1">
             {activeTab === "profile" &&
@@ -132,6 +157,8 @@ export function SettingsLayout() {
               "Manage your shopping and product discovery settings."}
             {activeTab === "privacy" &&
               "Control your data, metrics visibility, and NDA requirements."}
+            {activeTab === "subscription" &&
+              "Manage your billing, invoices, and Thrivo Pro features."}
           </p>
         </div>
 
@@ -142,6 +169,7 @@ export function SettingsLayout() {
           {activeTab === "creator" && <CreatorForm />}
           {activeTab === "consumer" && <ConsumerForm />}
           {activeTab === "privacy" && <PrivacySettings />}
+          {activeTab === "subscription" && <BillingSettings />}
         </div>
       </main>
     </div>

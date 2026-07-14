@@ -56,31 +56,31 @@ export function Feed({ role = "founder" }: FeedProps) {
   }
 
   return (
-    <div className="h-[calc(100vh-4rem)] lg:h-[calc(100vh-4rem)] w-full overflow-y-auto snap-y snap-mandatory pb-24 scroll-smooth">
-      <div className="flex flex-col items-center py-6 sm:py-8 gap-8 lg:gap-12">
-        {data.pages.map((page, pageIndex) => (
-          <div
-            key={pageIndex}
-            className="flex flex-col gap-8 lg:gap-12 w-full contents"
-          >
-            {page.items.map((item) => (
-              <FeedCard key={item.id} item={item} role={role} />
-            ))}
-          </div>
-        ))}
-
-        <div
-          ref={loadMoreRef}
-          className="h-20 w-full flex items-center justify-center snap-center"
-        >
-          {isFetchingNextPage ? (
-            <div className="h-8 w-8 rounded-full border-4 border-muted border-t-[#00C6D8] animate-spin" />
-          ) : !hasNextPage ? (
-            <p className="text-muted-foreground text-sm font-medium">
-              You&apos;ve reached the end!
-            </p>
-          ) : null}
+    <div className="flex flex-col items-center gap-8 w-full h-full overflow-y-auto py-8 hide-scrollbar max-w-2xl mx-auto snap-y snap-mandatory scroll-smooth">
+      {data.pages.map((page, pageIndex) => (
+        <div key={pageIndex} className="contents">
+          {page.items.map((item) => (
+            <div
+              key={item.id}
+              className="w-full snap-center flex justify-center"
+            >
+              <FeedCard item={item} role={role} />
+            </div>
+          ))}
         </div>
+      ))}
+
+      <div
+        ref={loadMoreRef}
+        className="w-full flex items-center justify-center py-6 snap-start"
+      >
+        {isFetchingNextPage ? (
+          <div className="h-8 w-8 rounded-full border-4 border-muted border-t-[#00C6D8] animate-spin" />
+        ) : !hasNextPage ? (
+          <p className="text-muted-foreground text-sm font-medium">
+            You&apos;ve reached the end!
+          </p>
+        ) : null}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { CreatorProfile } from "../types";
-import { CheckCircle2, Star, Sparkles } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 
 interface CreatorHeaderProps {
   creator: CreatorProfile;

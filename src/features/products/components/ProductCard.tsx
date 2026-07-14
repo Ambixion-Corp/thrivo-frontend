@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "../types";
-import { ShoppingCart, Star, Plus, Check } from "lucide-react";
+import { Star, Plus, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";

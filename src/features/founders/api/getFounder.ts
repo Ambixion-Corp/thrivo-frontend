@@ -92,6 +92,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
 export async function getFounderById(id: string): Promise<Founder> {
   // Simulate network latency (500ms to 1.5s)
   const delay = Math.floor(Math.random() * 1000) + 500;
+  await new Promise((r) => setTimeout(r, delay));
 
   const founder = MOCK_FOUNDERS[id];
 
@@ -107,6 +108,7 @@ export async function getFounderById(id: string): Promise<Founder> {
  */
 export async function getFeaturedFounders(): Promise<Founder[]> {
   const delay = Math.floor(Math.random() * 800) + 400;
+  await new Promise((r) => setTimeout(r, delay));
 
   return Object.values(MOCK_FOUNDERS);
 }

@@ -1,6 +1,5 @@
 import { InvestorProfile } from "../types";
 import { MapPin, Globe, CheckCircle2, TrendingUp } from "lucide-react";
-import { formatCurrency } from "@/lib/utils"; // I will assume this exists or I will create it. Actually, I will just format it here to be safe.
 
 interface InvestorHeaderProps {
   investor: InvestorProfile;

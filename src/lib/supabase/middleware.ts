@@ -11,6 +11,7 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
       getAll() {

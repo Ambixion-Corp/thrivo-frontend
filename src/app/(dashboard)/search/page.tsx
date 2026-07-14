@@ -1,11 +1,4 @@
-import {
-  Search as SearchIcon,
-  Filter,
-  TrendingUp,
-  Users,
-  Rocket,
-  DollarSign,
-} from "lucide-react";
+import { Search as SearchIcon, Filter, TrendingUp } from "lucide-react";
 import Image from "next/image";
 
 export default function SearchPage() {

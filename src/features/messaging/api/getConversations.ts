@@ -92,6 +92,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
 
 export async function getConversations(): Promise<Conversation[]> {
   const delay = Math.floor(Math.random() * 500) + 200;
+  await new Promise((r) => setTimeout(r, delay));
 
   return MOCK_CONVERSATIONS;
 }

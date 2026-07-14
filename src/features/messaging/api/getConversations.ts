@@ -9,6 +9,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
     participant: {
       id: "inv_1",
       name: "Sarah Jenkins",
+      username: "@sarah",
       role: "investor",
       avatarInitials: "SJ",
     },
@@ -16,6 +17,15 @@ const MOCK_CONVERSATIONS: Conversation[] = [
     messages: [
       {
         id: "msg_1",
+        senderId: "system",
+        text: "Data Room Access Approved",
+        timestamp: new Date(Date.now() - 1000 * 60 * 60 * 25).toISOString(),
+        isSystem: true,
+        systemActionUrl: "/startups/my-startup/dataroom",
+        systemActionText: "Enter Data Room",
+      },
+      {
+        id: "msg_1_a",
         senderId: "inv_1",
         text: "Hi there! I saw your pitch on the discovery feed. Really impressive traction.",
         timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
@@ -33,6 +43,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
     participant: {
       id: "2",
       name: "Juztriyaa",
+      username: "@juztriyaa",
       role: "founder",
       avatarInitials: "J",
     },
@@ -63,6 +74,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
     participant: {
       id: "inv_4",
       name: "David Chen",
+      username: "@david",
       role: "investor",
       avatarInitials: "DC",
     },
@@ -80,7 +92,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
 
 export async function getConversations(): Promise<Conversation[]> {
   const delay = Math.floor(Math.random() * 500) + 200;
-  await new Promise((resolve) => setTimeout(resolve, delay));
+  await new Promise((r) => setTimeout(r, delay));
 
   return MOCK_CONVERSATIONS;
 }

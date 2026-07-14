@@ -39,9 +39,14 @@ export function ChatSidebar({
 
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-baseline mb-1">
-                  <h3 className="font-semibold text-foreground truncate">
-                    {conv.participant.name}
-                  </h3>
+                  <div className="flex flex-col truncate">
+                    <h3 className="font-semibold text-foreground truncate">
+                      {conv.participant.name}
+                    </h3>
+                    <span className="text-[10px] text-[#00C6D8] font-bold">
+                      {conv.participant.username}
+                    </span>
+                  </div>
                   {lastMessage && (
                     <span className="text-[10px] text-muted-foreground shrink-0 ml-2">
                       {formatDistanceToNow(new Date(lastMessage.timestamp), {

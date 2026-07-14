@@ -1,9 +1,45 @@
 "use client";
 
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 export function LoginForm() {
+  const login = useAuthStore((state) => state.login);
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Mock login logic
+    login({
+      id: "mock_user_1",
+      name: "Satoshi Nakamoto",
+      email: email || "founder@startup.com",
+      role: "founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Satoshi",
+    });
+    router.push("/");
+  };
+
+  const handleGoogleLogin = () => {
+    login({
+      id: "mock_user_1",
+      name: "Satoshi Nakamoto",
+      email: "founder@startup.com",
+      role: "founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Satoshi",
+    });
+    router.push("/");
+  };
+
   return (
     <div className="space-y-6">
-      <button className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-xl font-semibold hover:bg-zinc-200 transition-colors shadow-sm">
+      <button
+        onClick={handleGoogleLogin}
+        className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-xl font-semibold hover:bg-zinc-200 transition-colors shadow-sm"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 48 48"
@@ -40,7 +76,7 @@ export function LoginForm() {
         </div>
       </div>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleLogin}>
         <div className="space-y-2">
           <label
             htmlFor="email"
@@ -51,6 +87,8 @@ export function LoginForm() {
           <input
             id="email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="founder@startup.com"
             className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 transition-all"
             required
@@ -75,6 +113,8 @@ export function LoginForm() {
           <input
             id="password"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             className="w-full rounded-xl border border-border bg-background/50 px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 transition-all"
             required

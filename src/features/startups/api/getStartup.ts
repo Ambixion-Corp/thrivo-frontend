@@ -2,7 +2,6 @@ import { StartupProfile } from "../types";
 
 export async function getStartupById(id: string): Promise<StartupProfile> {
   // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 800));
 
   // Mock data generator based on ID
   return {

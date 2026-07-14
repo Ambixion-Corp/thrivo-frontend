@@ -5,6 +5,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
   "1": {
     id: "1",
     name: "Dev Tribhuwan",
+    username: "@dev",
     headline: "Building the Operating System for Entrepreneurship",
     bio: "Serial entrepreneur passionate about removing friction from the startup journey. Previously built and scaled two B2B SaaS platforms. Now focused on unifying founders, creators, and investors through Thrivo.",
     location: "San Francisco, CA",
@@ -21,6 +22,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s1",
         name: "Thrivo",
+        username: "@thrivo",
         description:
           "The unified platform connecting founders, creators, investors, and consumers.",
         role: "Founder & CEO",
@@ -32,6 +34,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s2",
         name: "Ambixion Corp",
+        username: "@ambixion",
         description:
           "Parent company incubating next-gen startup infrastructure.",
         role: "Founder",
@@ -40,6 +43,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s3",
         name: "PrevSaaS",
+        username: "@prevsaas",
         description: "B2B Analytics tool for mid-market.",
         role: "Co-founder",
         status: "Acquired",
@@ -52,6 +56,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
   "2": {
     id: "2",
     name: "Alex Chen",
+    username: "@alexchen",
     headline: "AI Researcher turned Founder",
     bio: "Ex-DeepMind researcher building applied AI tools for developers. Obsessed with developer experience and generative models.",
     location: "London, UK",
@@ -67,6 +72,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
       {
         id: "s4",
         name: "NeuralDev",
+        username: "@neuraldev",
         description:
           "AI pair programmer that understands your entire codebase context.",
         role: "CEO & Co-founder",
@@ -86,7 +92,7 @@ const MOCK_FOUNDERS: Record<string, Founder> = {
 export async function getFounderById(id: string): Promise<Founder> {
   // Simulate network latency (500ms to 1.5s)
   const delay = Math.floor(Math.random() * 1000) + 500;
-  await new Promise((resolve) => setTimeout(resolve, delay));
+  await new Promise((r) => setTimeout(r, delay));
 
   const founder = MOCK_FOUNDERS[id];
 
@@ -102,7 +108,7 @@ export async function getFounderById(id: string): Promise<Founder> {
  */
 export async function getFeaturedFounders(): Promise<Founder[]> {
   const delay = Math.floor(Math.random() * 800) + 400;
-  await new Promise((resolve) => setTimeout(resolve, delay));
+  await new Promise((r) => setTimeout(r, delay));
 
   return Object.values(MOCK_FOUNDERS);
 }

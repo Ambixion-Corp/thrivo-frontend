@@ -16,7 +16,7 @@ export function OrderSummary({
   price,
 }: OrderSummaryProps) {
   // Mock calculations
-  const priceNum = parseFloat(price.replace("$", "").replace(",", ""));
+  const priceNum = parseFloat(price.replace(/[$,]/g, ""));
   const tax = priceNum * 0.08;
   const total = priceNum + tax;
 

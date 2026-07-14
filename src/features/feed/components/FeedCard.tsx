@@ -1,16 +1,21 @@
+"use client";
+
 import { FeedItem, UserRole } from "../types";
 import {
   Heart,
   MessageCircle,
   Share2,
-  ArrowUpRight,
-  Maximize2,
-  ShoppingCart,
   Target,
-  Sparkles,
+  MoreHorizontal,
+  Bookmark,
+  Lock,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { RequestAccessModal } from "@/features/escrow/components/RequestAccessModal";
+import { useRouter } from "next/navigation";
 
 interface FeedCardProps {
   item: FeedItem;
@@ -18,185 +23,199 @@ interface FeedCardProps {
 }
 
 export function FeedCard({ item, role = "founder" }: FeedCardProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+
+  const handleAccessGranted = () => {
+    // Navigate to the founder's profile upon access granted
+    router.push(`/founders/${item.founderId}`);
+  };
+
   return (
-    <div className="w-full max-w-[450px] mx-auto aspect-[9/16] relative rounded-[2.5rem] overflow-hidden bg-[#0A0A0A] border border-white/5 shadow-2xl snap-center shrink-0 group">
-      {/* Media Background - using generated asset */}
-      <div className="absolute inset-0 w-full h-full">
-        <Image
-          src="/feed-placeholder.png"
-          alt="Product Showcase"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-[15s] group-hover:scale-110 ease-linear opacity-80"
-          priority
-        />
-      </div>
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="w-full max-w-[420px] mx-auto bg-black sm:bg-[#0A0A0A]/80 sm:backdrop-blur-2xl sm:border sm:border-white/10 sm:hover:border-white/20 sm:rounded-[24px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.6)] flex flex-col mb-6 transition-colors duration-500"
+      >
+        {/* 1. Header Area */}
+        <div className="flex items-center justify-between p-3 sm:p-4">
+          <Link
+            href={`/founders/${item.founderId}`}
+            className="flex items-center gap-3"
+          >
+            <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] p-[1.5px]">
+              <div className="h-full w-full bg-[#0A0A0A] rounded-full flex items-center justify-center text-xs font-bold text-white overflow-hidden relative">
+                <span className="z-10">{item.founderName.charAt(0)}</span>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-white text-[14px] hover:text-[#00C6D8] transition-colors leading-none tracking-tight">
+                {item.founderUsername}
+              </span>
+              <span className="text-[11px] text-[#00C6D8] mt-0.5 font-medium tracking-wide">
+                VERIFIED FOUNDER
+              </span>
+            </div>
+          </Link>
+          <button className="text-muted-foreground hover:text-foreground p-1">
+            <MoreHorizontal className="w-5 h-5" />
+          </button>
+        </div>
 
-      {/* Elegant Dark Gradient Overlay for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent opacity-90" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#0A0A0A]/60 to-transparent" />
+        {/* 2. Media Area */}
+        <motion.div
+          whileHover={{ scale: 0.98 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className="relative w-full aspect-[9/16] bg-black cursor-pointer overflow-hidden rounded-md sm:rounded-none group"
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4 }}
+            className="w-full h-full relative"
+          >
+            <Image
+              src={item.imageUrl || "/feed-placeholder.png"}
+              alt="Startup Showcase"
+              fill
+              className="object-cover"
+              priority
+              unoptimized
+            />
+          </motion.div>
 
-      {/* Top Bar - Header/Controls */}
-      <div className="absolute top-0 left-0 w-full p-6 flex justify-between items-start">
-        <div className="flex gap-2">
-          <div className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#00C6D8] animate-pulse shadow-[0_0_8px_#00C6D8]" />
-            <span className="text-[10px] font-bold text-white tracking-widest uppercase">
-              Live Demo
+          {/* Top Badges */}
+          <div className="absolute top-3 left-3 flex gap-2">
+            <div className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 flex items-center gap-1.5">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#00C6D8] animate-pulse" />
+              <span className="text-[9px] font-bold text-white tracking-wider uppercase">
+                Live Demo
+              </span>
+            </div>
+            {role === "investor" && item.ticketSize && (
+              <div className="px-2.5 py-1 rounded-full bg-[#00C6D8]/80 backdrop-blur-md flex items-center gap-1.5">
+                <Target className="w-3 h-3 text-black" />
+                <span className="text-[9px] font-bold text-black tracking-wider uppercase">
+                  {item.ticketSize}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Request Access Overlay for Investors */}
+          {role === "investor" && (
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsModalOpen(true);
+                }}
+                className="px-6 py-3 rounded-full bg-white text-black font-extrabold text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(255,255,255,0.4)] flex items-center gap-2"
+              >
+                <Lock className="w-4 h-4" />
+                Request Data Room Access
+              </button>
+            </div>
+          )}
+        </motion.div>
+
+        {/* 3. Action Bar */}
+        <div className="flex flex-col px-3 sm:px-4 py-3">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-4">
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="hover:text-red-500 transition-colors group"
+              >
+                <Heart
+                  className="w-[26px] h-[26px] text-foreground group-hover:text-red-500"
+                  strokeWidth={1.75}
+                />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="hover:text-muted-foreground transition-colors"
+              >
+                <MessageCircle
+                  className="w-[26px] h-[26px] text-foreground"
+                  strokeWidth={1.75}
+                />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="hover:text-muted-foreground transition-colors"
+              >
+                <Share2
+                  className="w-[26px] h-[26px] text-foreground"
+                  strokeWidth={1.75}
+                />
+              </motion.button>
+            </div>
+            <div>
+              <motion.button
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className="hover:text-muted-foreground transition-colors"
+              >
+                <Bookmark
+                  className="w-[26px] h-[26px] text-foreground"
+                  strokeWidth={1.75}
+                />
+              </motion.button>
+            </div>
+          </div>
+
+          {/* 4. Likes & Caption */}
+          <div className="text-[14px] font-bold text-white mb-1.5 tracking-tight">
+            1,248 likes
+          </div>
+
+          <div className="text-[14px] leading-[20px] text-zinc-300">
+            <span className="font-bold text-white mr-1.5 tracking-tight">
+              {item.startupUsername}
+            </span>
+            <span>
+              Launching{" "}
+              <span className="text-white font-medium">{item.startupName}</span>
+              ! {item.oneLiner}
             </span>
           </div>
 
-          {/* Role Specific Badges */}
-          {role === "creator" && item.affiliateCommission && (
-            <div className="px-3 py-1.5 rounded-full bg-[#8DEE5F]/20 backdrop-blur-md border border-[#8DEE5F]/30 flex items-center gap-1.5">
-              <Sparkles className="w-3 h-3 text-[#8DEE5F]" />
-              <span className="text-[10px] font-bold text-[#8DEE5F] tracking-wider uppercase">
-                {item.affiliateCommission} Commission
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {item.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[#00C6D8] text-[13px] hover:underline cursor-pointer"
+              >
+                #{tag.replace(/\s+/g, "")}
               </span>
-            </div>
-          )}
-          {role === "investor" && item.ticketSize && (
-            <div className="px-3 py-1.5 rounded-full bg-[#00C6D8]/20 backdrop-blur-md border border-[#00C6D8]/30 flex items-center gap-1.5">
-              <Target className="w-3 h-3 text-[#00C6D8]" />
-              <span className="text-[10px] font-bold text-[#00C6D8] tracking-wider uppercase">
-                {item.ticketSize}
-              </span>
-            </div>
-          )}
-          {role === "consumer" && item.price && (
-            <div className="px-3 py-1.5 rounded-full bg-purple-500/20 backdrop-blur-md border border-purple-500/30 flex items-center gap-1.5">
-              <ShoppingCart className="w-3 h-3 text-purple-400" />
-              <span className="text-[10px] font-bold text-purple-400 tracking-wider uppercase">
-                {item.price}
-              </span>
-            </div>
-          )}
-        </div>
-        <button className="p-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white/70 hover:text-white transition-colors">
-          <Maximize2 className="w-4 h-4" />
-        </button>
-      </div>
-
-      {/* Main Content overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6">
-        <div className="flex items-end justify-between gap-4">
-          {/* Main Info */}
-          <div className="flex-1 space-y-4">
-            <Link
-              href={`/founders/${item.founderId}`}
-              className="flex items-center gap-3 group/author w-fit"
-            >
-              <div className="h-10 w-10 rounded-full bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] p-[1.5px] shadow-[0_0_15px_rgba(0,198,216,0.3)]">
-                <div className="h-full w-full bg-[#0A0A0A] rounded-full flex items-center justify-center text-xs font-bold text-white">
-                  {item.founderName.charAt(0)}
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-white group-hover/author:text-[#00C6D8] transition-colors text-sm">
-                  {item.founderName}
-                </span>
-                <span className="text-[10px] text-zinc-400 font-medium">
-                  Verified Founder
-                </span>
-              </div>
-            </Link>
-
-            <div className="space-y-1.5">
-              <h2 className="text-3xl font-extrabold text-white leading-[1.1] tracking-tight">
-                {item.startupName}
-              </h2>
-              <p className="text-sm text-zinc-300 line-clamp-2 font-medium leading-relaxed max-w-[90%]">
-                {item.oneLiner}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 pt-1">
-              {item.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-white/5 backdrop-blur-md text-xs font-medium text-zinc-200 border border-white/10 shadow-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Metrics Mini-Bar */}
-            <div className="flex items-center gap-4 pt-3 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
-              {item.metrics.raised && (
-                <div className="flex flex-col">
-                  <span className="text-zinc-500">Raised</span>
-                  <span className="text-[#8DEE5F]">{item.metrics.raised}</span>
-                </div>
-              )}
-              {item.metrics.users && (
-                <div className="flex flex-col">
-                  <span className="text-zinc-500">Users</span>
-                  <span className="text-white">{item.metrics.users}</span>
-                </div>
-              )}
-            </div>
+            ))}
           </div>
 
-          {/* Right Action Bar */}
-          <div className="flex flex-col items-center gap-6 pb-2">
-            <button className="flex flex-col items-center gap-1.5 group/btn">
-              <span className="flex p-3.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white group-hover/btn:bg-white/10 group-hover/btn:text-[#00C6D8] group-hover/btn:border-[#00C6D8]/50 group-active/btn:scale-95 transition-all duration-300">
-                <Heart className="h-6 w-6" />
-              </span>
-              <span className="text-[11px] font-bold text-white drop-shadow-md">
-                1.2k
-              </span>
-            </button>
+          {/* View all comments */}
+          <div className="text-[13px] text-muted-foreground mt-2 cursor-pointer hover:text-zinc-300">
+            View all 48 comments
+          </div>
 
-            <button className="flex flex-col items-center gap-1.5 group/btn">
-              <span className="flex p-3.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white group-hover/btn:bg-white/10 transition-all duration-300 group-active/btn:scale-95">
-                <MessageCircle className="h-6 w-6" />
-              </span>
-              <span className="text-[11px] font-bold text-white drop-shadow-md">
-                48
-              </span>
-            </button>
-
-            <button className="flex flex-col items-center gap-1.5 group/btn">
-              <span className="flex p-3.5 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 text-white group-hover/btn:bg-white/10 transition-all duration-300 group-active/btn:scale-95">
-                <Share2 className="h-6 w-6" />
-              </span>
-            </button>
-
-            {role === "consumer" ? (
-              <Link
-                href={`/checkout/${item.id}`}
-                className="mt-2 p-4 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition-opacity" />
-                <ShoppingCart className="h-6 w-6 relative z-10" />
-              </Link>
-            ) : role === "creator" ? (
-              <Link
-                href="/affiliates"
-                className="mt-2 p-4 rounded-full bg-gradient-to-tr from-[#8DEE5F] to-emerald-400 text-black shadow-[0_0_20px_rgba(141,238,95,0.4)] hover:shadow-[0_0_30px_rgba(141,238,95,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition-opacity" />
-                <Sparkles className="h-6 w-6 relative z-10" />
-              </Link>
-            ) : (
-              <Link
-                href={`/startups/${item.id}`}
-                className="mt-2 p-4 rounded-full bg-gradient-to-tr from-[#00C6D8] to-[#8DEE5F] text-black shadow-[0_0_20px_rgba(0,198,216,0.4)] hover:shadow-[0_0_30px_rgba(0,198,216,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition-opacity" />
-                <ArrowUpRight className="h-6 w-6 relative z-10" />
-              </Link>
-            )}
+          {/* Timestamp */}
+          <div className="text-[10px] text-muted-foreground uppercase mt-2 tracking-wide">
+            2 hours ago
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Bottom Progress Bar mimic */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10 backdrop-blur-sm">
-        <div className="h-full bg-gradient-to-r from-[#00C6D8] to-[#8DEE5F] w-[35%] rounded-r-full shadow-[0_0_10px_#00C6D8]" />
-      </div>
-    </div>
+      <RequestAccessModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAccessGranted={handleAccessGranted}
+        founderName={item.founderName}
+      />
+    </>
   );
 }

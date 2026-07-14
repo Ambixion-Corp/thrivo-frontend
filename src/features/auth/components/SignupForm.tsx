@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
+import { UserRole } from "@/features/feed/types";
 import {
   ArrowRight,
   Briefcase,
@@ -10,8 +13,14 @@ import {
 } from "lucide-react";
 
 export function SignupForm() {
+  const login = useAuthStore((state) => state.login);
+  const router = useRouter();
   const [step, setStep] = useState<1 | 2>(1);
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const roles = [
     {
@@ -48,8 +57,16 @@ export function SignupForm() {
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedRole) return;
-    // Handle the actual signup logic here
-    console.log("Signing up with role:", selectedRole);
+
+    login({
+      id: "mock_user_new",
+      name: `${firstName} ${lastName}`,
+      email: email,
+      role: selectedRole,
+      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${firstName}`,
+    });
+
+    router.push("/");
   };
 
   return (
@@ -105,6 +122,8 @@ export function SignupForm() {
                 <input
                   id="firstName"
                   type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder="Satoshi"
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 focus:border-[#00C6D8]/50 transition-all placeholder:text-zinc-600"
                   required
@@ -120,6 +139,8 @@ export function SignupForm() {
                 <input
                   id="lastName"
                   type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder="Nakamoto"
                   className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 focus:border-[#00C6D8]/50 transition-all placeholder:text-zinc-600"
                   required
@@ -137,6 +158,8 @@ export function SignupForm() {
               <input
                 id="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="founder@startup.com"
                 className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 focus:border-[#00C6D8]/50 transition-all placeholder:text-zinc-600"
                 required
@@ -153,6 +176,8 @@ export function SignupForm() {
               <input
                 id="password"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#00C6D8]/50 focus:border-[#00C6D8]/50 transition-all placeholder:text-zinc-600"
                 required
@@ -199,7 +224,7 @@ export function SignupForm() {
                   name="role"
                   value={role.id}
                   className="sr-only"
-                  onChange={(e) => setSelectedRole(e.target.value)}
+                  onChange={(e) => setSelectedRole(e.target.value as UserRole)}
                   checked={selectedRole === role.id}
                 />
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.1...temp-app-v0.1.2) (2026-08-14)
+
+
+### Documentation
+
+* document automated changelog and releases in README ([#30](https://github.com/Ambixion-Corp/thrivo-frontend/issues/30)) ([f614dd7](https://github.com/Ambixion-Corp/thrivo-frontend/commit/f614dd7db6b9e645770868ed9eb6515af9c1967a))
+
 ## [0.1.1](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.0...temp-app-v0.1.1) (2026-08-12)
 
 

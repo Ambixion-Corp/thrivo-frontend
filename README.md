@@ -72,6 +72,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. Data is a mix of live Supabase endpoints and mocked data via the `features/**/api` layers for incomplete backend features.
 
+## 📝 Changelog & Releases
+
+This repository uses [release-please](https://github.com/googleapis/release-please) to automate versioning and changelog generation from Conventional Commits. A `CHANGELOG.md` is maintained at the repository root and is updated automatically whenever changes are merged to `main`.
+
+- **Version bumps** and changelog entries are prepared in a release pull request by the `release-please` GitHub Actions workflow.
+- Merging the release pull request publishes a tagged GitHub Release alongside the updated changelog.
+- Commits should follow the `feat:`, `fix:`, `docs:`, `chore:`, `build:`, `style:`, `refactor:`, `perf:`, `ci:`, or `deploy:` prefixes so they are grouped into the correct changelog sections.
+
 ## 🔮 Future Roadmap (Phase 2+)
 
 - **Creator Marketplace**: Affiliate loops for creators promoting vetted products.

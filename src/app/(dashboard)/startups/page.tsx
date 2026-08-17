@@ -19,9 +19,12 @@ export default function StartupsPage() {
             </p>
           </div>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2.5 bg-white text-black font-bold text-sm rounded-xl hover:bg-zinc-200 transition-colors">
+        <Link
+          href="/add"
+          className="flex items-center gap-2 px-4 py-2.5 bg-white text-black font-bold text-sm rounded-xl hover:bg-zinc-200 transition-colors"
+        >
           <Plus className="w-4 h-4" /> Add Startup
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -66,13 +69,13 @@ export default function StartupsPage() {
 
           <div className="flex items-center gap-3">
             <Link
-              href="/startups/edit"
+              href="/startups/1/edit"
               className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-sm rounded-xl transition-colors"
             >
               <Settings2 className="w-4 h-4" /> Edit Profile
             </Link>
             <Link
-              href="/startups/analytics"
+              href="/startups/1/analytics"
               className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#00C6D8] text-black font-bold text-sm rounded-xl hover:bg-[#00C6D8]/80 transition-colors"
             >
               <BarChart2 className="w-4 h-4" /> Analytics
@@ -81,7 +84,10 @@ export default function StartupsPage() {
         </div>
 
         {/* Create New Card */}
-        <div className="bg-zinc-900/10 border-2 border-dashed border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:border-zinc-700 hover:bg-zinc-900/20 transition-colors cursor-pointer min-h-[300px]">
+        <Link
+          href="/add"
+          className="bg-zinc-900/10 border-2 border-dashed border-zinc-800 rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:border-zinc-700 hover:bg-zinc-900/20 transition-colors min-h-[300px]"
+        >
           <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center mb-4">
             <Plus className="w-8 h-8 text-zinc-400" />
           </div>
@@ -91,7 +97,7 @@ export default function StartupsPage() {
           <p className="text-sm text-zinc-500 max-w-[200px]">
             Create a new startup profile to attract investors and creators.
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.1.3](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.2...temp-app-v0.1.3) (2026-08-18)
+
+
+### Bug Fixes
+
+* **startups:** repair profile and analytics navigation ([9eb9c0d](https://github.com/Ambixion-Corp/thrivo-frontend/commit/9eb9c0d87380f906b5c4f8e67c82734f7a9d7be6))
+* **startups:** repair profile and analytics navigation ([2e9910b](https://github.com/Ambixion-Corp/thrivo-frontend/commit/2e9910b2d5cd9cd3a2c2a586544a69246455be78))
+
+
+### Build System
+
+* **deps-dev:** bump eslint-config-next from 16.2.12 to 16.3.1 ([ceff9bb](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ceff9bb5dcb5196aa95f6156a53959af161bb19d))
+* **deps-dev:** bump eslint-config-next from 16.2.12 to 16.3.1 ([f840e0d](https://github.com/Ambixion-Corp/thrivo-frontend/commit/f840e0db464c378ca62f0f3d501654a0efccc2eb))
+* **deps:** bump @base-ui/react from 1.6.0 to 1.7.0 ([9bae3d8](https://github.com/Ambixion-Corp/thrivo-frontend/commit/9bae3d8b2c03bf1d3e33aa4ae70663825fa73473))
+* **deps:** bump @base-ui/react from 1.6.0 to 1.7.0 ([24894a8](https://github.com/Ambixion-Corp/thrivo-frontend/commit/24894a8cb7f35f2dda57f91a9a1851e8aba8a17d))
+* **deps:** bump @supabase/supabase-js from 2.110.7 to 2.112.3 ([b335cc4](https://github.com/Ambixion-Corp/thrivo-frontend/commit/b335cc461249a7366391e4ea340ff16955adcad5))
+* **deps:** bump @supabase/supabase-js from 2.110.7 to 2.112.3 ([7381abf](https://github.com/Ambixion-Corp/thrivo-frontend/commit/7381abf81aeb5a99983f68882bbfe254d595d2ea))
+* **deps:** bump github/codeql-action from 4.37.6 to 4.37.7 ([597c364](https://github.com/Ambixion-Corp/thrivo-frontend/commit/597c364acf93e447b638c79650338cad4e4a1bfb))
+* **deps:** bump github/codeql-action from 4.37.6 to 4.37.7 ([6357181](https://github.com/Ambixion-Corp/thrivo-frontend/commit/6357181ebbc83a7f728fd1fe08fef8e31aa3e3aa))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([71732eb](https://github.com/Ambixion-Corp/thrivo-frontend/commit/71732eb90d8b03d8534898ecf8fa5d74320b98f7))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([5e48ab6](https://github.com/Ambixion-Corp/thrivo-frontend/commit/5e48ab61e32d7948a8767d66eed527b56dd5ebde))
+* **deps:** bump lenis from 1.3.25 to 1.3.26 ([4b9c3fb](https://github.com/Ambixion-Corp/thrivo-frontend/commit/4b9c3fb40d6116167eeb514d2af1918b1a737495))
+* **deps:** bump lenis from 1.3.25 to 1.3.26 ([6bd92a5](https://github.com/Ambixion-Corp/thrivo-frontend/commit/6bd92a5c37d21fe1caf2b11c277b9b5a2f68d4d3))
+* **deps:** bump lucide-react from 1.24.0 to 1.31.0 ([c8948ac](https://github.com/Ambixion-Corp/thrivo-frontend/commit/c8948ac722f1a9ef9cf5421c3fe5e50db0400dc2))
+* **deps:** bump lucide-react from 1.24.0 to 1.31.0 ([d8c12f2](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d8c12f2a12e92463759206510c919b3f1a91071b))
+
 ## [0.1.2](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.1...temp-app-v0.1.2) (2026-08-14)
 
 

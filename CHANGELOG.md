@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.4...temp-app-v0.1.5) (2026-09-01)
+
+
+### Build System
+
+* **deps:** bump lucide-react from 1.31.0 to 1.37.0 ([#43](https://github.com/Ambixion-Corp/thrivo-frontend/issues/43)) ([8161176](https://github.com/Ambixion-Corp/thrivo-frontend/commit/8161176936549021630e4b105113872952cb53ac))
+
 ## [0.1.4](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.3...temp-app-v0.1.4) (2026-09-01)
 
 

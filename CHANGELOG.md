@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.4](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.3...temp-app-v0.1.4) (2026-09-01)
+
+
+### Build System
+
+* **deps-dev:** bump eslint-config-next from 16.3.1 to 16.3.2 ([#45](https://github.com/Ambixion-Corp/thrivo-frontend/issues/45)) ([855a5ab](https://github.com/Ambixion-Corp/thrivo-frontend/commit/855a5ab7f9d3d5c901e142ec352cdabc9e41f9b0))
+* **deps:** bump @supabase/ssr from 0.12.3 to 0.12.4 ([#41](https://github.com/Ambixion-Corp/thrivo-frontend/issues/41)) ([36855ee](https://github.com/Ambixion-Corp/thrivo-frontend/commit/36855ee461ee90b7a38bcf95ab5d53e9ac2a202d))
+* **deps:** bump github/codeql-action from 4.37.7 to 4.37.8 ([#46](https://github.com/Ambixion-Corp/thrivo-frontend/issues/46)) ([9a07dd4](https://github.com/Ambixion-Corp/thrivo-frontend/commit/9a07dd4c1a7439675789fa7ea3e2cc33ecbab859))
+* **deps:** bump next from 16.2.12 to 16.3.2 ([#44](https://github.com/Ambixion-Corp/thrivo-frontend/issues/44)) ([97e32d4](https://github.com/Ambixion-Corp/thrivo-frontend/commit/97e32d4c4ce386df619d313060fbb1b26a05d248))
+
 ## [0.1.3](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.2...temp-app-v0.1.3) (2026-08-18)
 
 

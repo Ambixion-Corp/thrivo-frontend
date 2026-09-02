@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import {
   ChevronLeft,
   Lock,
@@ -50,6 +50,7 @@ const DOCUMENTS = [
 
 export default function DataRoomVaultPage() {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
 
   return (
     <div className="max-w-6xl mx-auto pb-16 px-4 sm:px-6 lg:px-8 pt-4">
@@ -93,7 +94,7 @@ export default function DataRoomVaultPage() {
         </div>
 
         <Link
-          href="/messages/founder-id-123"
+          href={`/messages/founder-${params?.id || "1"}`}
           className="flex items-center justify-center gap-2 px-6 py-3 bg-foreground text-background font-bold rounded-xl hover:bg-[#00C6D8] hover:text-black transition-all shadow-[0_0_20px_rgba(0,198,216,0.2)]"
         >
           <MessagesSquare className="w-5 h-5" /> Negotiate Deal

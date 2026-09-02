@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Home,
   Briefcase,
@@ -23,6 +26,8 @@ const navigation = [
 ];
 
 export function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:sticky lg:top-0 lg:h-screen shrink-0 lg:border-r lg:border-border lg:bg-background/80 lg:backdrop-blur-md">
       {/* Logo Section */}
@@ -42,20 +47,34 @@ export function Sidebar() {
       {/* Navigation Links */}
       <div className="flex flex-1 flex-col overflow-y-auto px-4 py-4">
         <nav className="flex-1 space-y-1">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="group flex items-center gap-x-4 rounded-xl px-3 py-3.5 text-base font-semibold text-foreground hover:bg-secondary/50 transition-all duration-200"
-            >
-              <item.icon
-                className="h-6 w-6 shrink-0 text-foreground group-hover:scale-110 transition-transform duration-200"
-                aria-hidden="true"
-                strokeWidth={1.75}
-              />
-              {item.name}
-            </Link>
-          ))}
+          {navigation.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname?.startsWith(item.href));
+
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`group flex items-center gap-x-4 rounded-xl px-3 py-3 text-sm font-semibold transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#00C6D8]/10 text-[#00C6D8] border border-[#00C6D8]/20 shadow-[0_0_15px_rgba(0,198,216,0.1)]"
+                    : "text-foreground hover:bg-secondary/60 hover:text-foreground"
+                }`}
+              >
+                <item.icon
+                  className={`h-5 w-5 shrink-0 transition-transform duration-200 ${
+                    isActive
+                      ? "text-[#00C6D8] scale-105"
+                      : "text-muted-foreground group-hover:text-foreground group-hover:scale-110"
+                  }`}
+                  aria-hidden="true"
+                  strokeWidth={isActive ? 2.25 : 1.75}
+                />
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
       </div>
 
@@ -63,7 +82,11 @@ export function Sidebar() {
       <div className="p-4 border-t border-border">
         <Link
           href="/settings"
-          className="flex w-full items-center gap-x-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200"
+          className={`flex w-full items-center gap-x-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200 ${
+            pathname?.startsWith("/settings")
+              ? "bg-[#00C6D8]/10 text-[#00C6D8] font-semibold border border-[#00C6D8]/20"
+              : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+          }`}
         >
           <Settings className="h-5 w-5 shrink-0" aria-hidden="true" />
           Settings

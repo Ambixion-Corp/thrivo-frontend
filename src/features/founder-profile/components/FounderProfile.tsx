@@ -4,8 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import { getFounderProfile } from "../api/getFounder";
 import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
-import { MapPin, Users, Building, Lock } from "lucide-react";
+import {
+  MapPin,
+  Users,
+  Building,
+  Lock,
+  MessageSquare,
+  Award,
+  TrendingUp,
+  CheckCircle,
+  ExternalLink,
+  Shield,
+  Layers,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 interface FounderProfileProps {
@@ -24,6 +37,7 @@ export function FounderProfile({ id }: FounderProfileProps) {
   });
 
   const [activeTab, setActiveTab] = useState<"startups" | "about">("startups");
+  const [isFollowing, setIsFollowing] = useState(false);
 
   if (isLoading) {
     return (
@@ -56,9 +70,17 @@ export function FounderProfile({ id }: FounderProfileProps) {
         </div>
 
         <div className="flex-1 text-center md:text-left">
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mb-2">
-            {founder.name}
-          </h1>
+          <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+            <h1 className="text-3xl font-extrabold text-white tracking-tight">
+              {founder.name}
+            </h1>
+            <span
+              className="p-1 rounded-full bg-[#00C6D8]/20 text-[#00C6D8]"
+              title="Verified Founder"
+            >
+              <CheckCircle className="w-4 h-4" />
+            </span>
+          </div>
           <p className="text-[#00C6D8] font-semibold mb-4">
             {founder.username}
           </p>
@@ -74,7 +96,9 @@ export function FounderProfile({ id }: FounderProfileProps) {
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4 text-zinc-500" />
               <span className="font-bold text-white">
-                {founder.followersCount.toLocaleString()}
+                {(
+                  founder.followersCount + (isFollowing ? 1 : 0)
+                ).toLocaleString()}
               </span>{" "}
               followers
             </div>
@@ -82,12 +106,22 @@ export function FounderProfile({ id }: FounderProfileProps) {
         </div>
 
         <div className="flex flex-col gap-3 w-full md:w-auto">
-          <button className="px-8 py-3 rounded-xl bg-white text-black font-bold hover:bg-zinc-200 transition-colors shadow-lg shadow-white/10">
-            Follow
+          <button
+            onClick={() => setIsFollowing((prev) => !prev)}
+            className={`px-8 py-3 rounded-xl font-bold transition-all shadow-lg ${
+              isFollowing
+                ? "bg-[#00C6D8]/20 text-[#00C6D8] border border-[#00C6D8]/50 shadow-[#00C6D8]/10"
+                : "bg-white text-black hover:bg-zinc-200 shadow-white/10"
+            }`}
+          >
+            {isFollowing ? "Following" : "Follow"}
           </button>
-          <button className="px-8 py-3 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition-colors border border-zinc-700">
-            Message
-          </button>
+          <Link
+            href={`/messages/${founder.id}`}
+            className="px-8 py-3 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center justify-center gap-2 text-center"
+          >
+            <MessageSquare className="w-4 h-4" /> Message
+          </Link>
         </div>
       </div>
 
@@ -95,7 +129,11 @@ export function FounderProfile({ id }: FounderProfileProps) {
       <div className="flex gap-8 border-b border-zinc-800 mb-8">
         <button
           onClick={() => setActiveTab("startups")}
-          className={`pb-4 text-sm font-bold tracking-wide transition-colors relative ${activeTab === "startups" ? "text-white" : "text-zinc-500 hover:text-zinc-300"}`}
+          className={`pb-4 text-sm font-bold tracking-wide transition-colors relative ${
+            activeTab === "startups"
+              ? "text-white"
+              : "text-zinc-500 hover:text-zinc-300"
+          }`}
         >
           STARTUPS
           {activeTab === "startups" && (
@@ -107,7 +145,11 @@ export function FounderProfile({ id }: FounderProfileProps) {
         </button>
         <button
           onClick={() => setActiveTab("about")}
-          className={`pb-4 text-sm font-bold tracking-wide transition-colors relative ${activeTab === "about" ? "text-white" : "text-zinc-500 hover:text-zinc-300"}`}
+          className={`pb-4 text-sm font-bold tracking-wide transition-colors relative ${
+            activeTab === "about"
+              ? "text-white"
+              : "text-zinc-500 hover:text-zinc-300"
+          }`}
         >
           ABOUT
           {activeTab === "about" && (
@@ -119,44 +161,50 @@ export function FounderProfile({ id }: FounderProfileProps) {
         </button>
       </div>
 
-      {/* Content */}
+      {/* Content: STARTUPS */}
       {activeTab === "startups" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-300">
           {founder.startups.map((startup) => (
             <div
               key={startup.id}
-              className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-zinc-700 transition-colors"
+              className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-6 hover:border-zinc-700 transition-colors flex flex-col justify-between"
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00C6D8]/20 to-[#8DEE5F]/20 border border-white/10 flex items-center justify-center">
-                  <Building className="w-6 h-6 text-[#00C6D8]" />
+              <div>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00C6D8]/20 to-[#8DEE5F]/20 border border-white/10 flex items-center justify-center">
+                    <Building className="w-6 h-6 text-[#00C6D8]" />
+                  </div>
+                  <div>
+                    <Link
+                      href={`/startups/${startup.id.replace("startup_", "")}`}
+                      className="text-xl font-bold text-white hover:text-[#00C6D8] transition-colors flex items-center gap-1.5"
+                    >
+                      {startup.name}
+                      <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+                    </Link>
+                    <p className="text-xs text-zinc-500 font-medium">
+                      {startup.username}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">
-                    {startup.name}
-                  </h3>
-                  <p className="text-xs text-zinc-500 font-medium">
-                    {startup.username}
-                  </p>
-                </div>
-              </div>
-              <p className="text-sm font-medium text-zinc-300 mb-4">
-                {startup.oneLiner}
-              </p>
+                <p className="text-sm font-medium text-zinc-300 mb-4 leading-relaxed">
+                  {startup.oneLiner}
+                </p>
 
-              <div className="flex gap-2 mb-6 flex-wrap">
-                {startup.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] font-bold uppercase tracking-wider text-[#00C6D8] bg-[#00C6D8]/10 px-2 py-1 rounded-md"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <div className="flex gap-2 mb-6 flex-wrap">
+                  {startup.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-bold uppercase tracking-wider text-[#00C6D8] bg-[#00C6D8]/10 px-2.5 py-1 rounded-md border border-[#00C6D8]/20"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Data Room / Deck Access */}
-              <div className="bg-black rounded-2xl p-4 border border-zinc-800 flex items-center justify-between">
+              <div className="bg-black rounded-2xl p-4 border border-zinc-800 flex items-center justify-between mt-auto">
                 <div>
                   <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-1">
                     Data Room
@@ -166,20 +214,103 @@ export function FounderProfile({ id }: FounderProfileProps) {
                   </p>
                 </div>
                 {user?.role === "investor" ? (
-                  <button className="px-4 py-2 bg-[#00C6D8] text-black font-bold text-xs rounded-lg hover:bg-[#00C6D8]/90 transition-colors">
+                  <Link
+                    href={`/startups/${startup.id.replace("startup_", "")}/dataroom`}
+                    className="px-4 py-2 bg-[#00C6D8] text-black font-bold text-xs rounded-lg hover:bg-[#00C6D8]/90 transition-colors"
+                  >
                     View Deck
-                  </button>
+                  </Link>
                 ) : (
-                  <div className="px-3 py-1.5 bg-zinc-900 border border-zinc-800 rounded-lg flex items-center gap-2">
+                  <Link
+                    href={`/startups/${startup.id.replace("startup_", "")}/dataroom`}
+                    className="px-3 py-1.5 bg-zinc-900 border border-zinc-800 rounded-lg flex items-center gap-2 hover:border-zinc-700 transition-colors"
+                  >
                     <Lock className="w-3.5 h-3.5 text-zinc-500" />
                     <span className="text-xs font-bold text-zinc-500 uppercase">
-                      Investors Only
+                      Request Access
                     </span>
-                  </div>
+                  </Link>
                 )}
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Content: ABOUT */}
+      {activeTab === "about" && (
+        <div className="space-y-8 animate-in fade-in duration-300">
+          {/* Biography Card */}
+          <div className="bg-zinc-900/40 border border-zinc-800 rounded-3xl p-6 sm:p-8 space-y-4">
+            <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+              <Award className="w-5 h-5 text-[#00C6D8]" /> Founder Background
+            </h3>
+            <p className="text-zinc-300 leading-relaxed text-base">
+              {founder.bio}
+            </p>
+            <p className="text-zinc-400 leading-relaxed text-sm">
+              Passionate about hyper-scale platforms, open founder networks, and
+              reducing venture friction. Experienced in zero-to-one product
+              design, fundraising, and developer ecosystems.
+            </p>
+          </div>
+
+          {/* Stats Bento Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-5">
+              <div className="flex items-center gap-2 text-[#00C6D8] mb-2 text-xs font-bold uppercase tracking-wider">
+                <TrendingUp className="w-4 h-4" /> Capital Raised
+              </div>
+              <p className="text-2xl font-extrabold text-white">
+                {founder.startups[0]?.metrics.raised || "$2.5M+"}
+              </p>
+              <p className="text-xs text-zinc-500 mt-1">
+                Across active ventures
+              </p>
+            </div>
+
+            <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-5">
+              <div className="flex items-center gap-2 text-[#8DEE5F] mb-2 text-xs font-bold uppercase tracking-wider">
+                <Building className="w-4 h-4" /> Ventures Founded
+              </div>
+              <p className="text-2xl font-extrabold text-white">
+                {founder.startups.length} Active
+              </p>
+              <p className="text-xs text-zinc-500 mt-1">Verified on Thrivo</p>
+            </div>
+
+            <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-5">
+              <div className="flex items-center gap-2 text-purple-400 mb-2 text-xs font-bold uppercase tracking-wider">
+                <Shield className="w-4 h-4" /> Ecosystem Trust
+              </div>
+              <p className="text-2xl font-extrabold text-white">Level 3</p>
+              <p className="text-xs text-zinc-500 mt-1">KYC & Escrow Cleared</p>
+            </div>
+          </div>
+
+          {/* Expertise & Focus Areas */}
+          <div className="bg-zinc-900/40 border border-zinc-800 rounded-3xl p-6 sm:p-8 space-y-4">
+            <h3 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+              <Layers className="w-5 h-5 text-[#8DEE5F]" /> Sectors of Interest
+            </h3>
+            <div className="flex flex-wrap gap-2.5">
+              {[
+                "Artificial Intelligence",
+                "Developer Tooling",
+                "Creator Economy",
+                "B2B SaaS",
+                "FinTech Rails",
+                "Hardware & Robotics",
+              ].map((sector) => (
+                <span
+                  key={sector}
+                  className="px-3.5 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-semibold text-zinc-300"
+                >
+                  {sector}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </div>

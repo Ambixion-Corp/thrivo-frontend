@@ -20,6 +20,11 @@ interface ChatState {
   conversations: Conversation[];
   activeConversationId: string | null;
   setActiveConversation: (id: string | null) => void;
+  getOrCreateConversation: (
+    participantId: string,
+    participantName?: string,
+    participantAvatar?: string,
+  ) => string;
   sendMessage: (conversationId: string, text: string, senderId: string) => void;
 }
 
@@ -68,10 +73,49 @@ const mockConversations: Conversation[] = [
   },
 ];
 
-export const useChatStore = create<ChatState>((set) => ({
+export const useChatStore = create<ChatState>((set, get) => ({
   conversations: mockConversations,
   activeConversationId: null,
   setActiveConversation: (id) => set({ activeConversationId: id }),
+  getOrCreateConversation: (
+    participantId,
+    participantName,
+    participantAvatar,
+  ) => {
+    const state = get();
+    const existing = state.conversations.find(
+      (c) => c.id === participantId || c.participantId === participantId,
+    );
+    if (existing) {
+      set({ activeConversationId: existing.id });
+      return existing.id;
+    }
+    const newConv: Conversation = {
+      id: `conv_${participantId}`,
+      participantId,
+      participantName: participantName || `Founder ${participantId}`,
+      participantAvatar:
+        participantAvatar ||
+        `https://api.dicebear.com/7.x/avataaars/svg?seed=${participantId}`,
+      unreadCount: 0,
+      messages: [
+        {
+          id: `msg_welcome_${Date.now()}`,
+          senderId: participantId,
+          text: `Hi! Thanks for reaching out through the Data Room. How can we collaborate?`,
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+      ],
+    };
+    set((s) => ({
+      conversations: [newConv, ...s.conversations],
+      activeConversationId: newConv.id,
+    }));
+    return newConv.id;
+  },
   sendMessage: (conversationId, text, senderId) =>
     set((state) => ({
       conversations: state.conversations.map((conv) =>

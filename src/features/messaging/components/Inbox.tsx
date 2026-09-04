@@ -7,16 +7,27 @@ import Image from "next/image";
 import { Send, MoreVertical, Phone, Video } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Inbox() {
+interface InboxProps {
+  initialConversationId?: string;
+}
+
+export function Inbox({ initialConversationId }: InboxProps = {}) {
   const { user } = useAuthStore();
   const {
     conversations,
     activeConversationId,
     setActiveConversation,
+    getOrCreateConversation,
     sendMessage,
   } = useChatStore();
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (initialConversationId) {
+      getOrCreateConversation(initialConversationId);
+    }
+  }, [initialConversationId, getOrCreateConversation]);
 
   const activeConversation = conversations.find(
     (c) => c.id === activeConversationId,

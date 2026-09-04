@@ -1,5 +1,5 @@
 import { getProductById } from "@/features/products/api/getProducts";
-import { ProductShowcase } from "@/features/products/components/ProductShowcase";
+import { ProductDetail } from "@/features/products/components/ProductDetail";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Loader2, ArrowLeft } from "lucide-react";
@@ -17,9 +17,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors font-medium"
+          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors font-medium group"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Marketplace
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          Back to Marketplace
         </Link>
 
         <Suspense
@@ -43,5 +44,5 @@ async function ProductDetailContent({ id }: { id: string }) {
     notFound();
   }
 
-  return <ProductShowcase />;
+  return <ProductDetail product={product} />;
 }

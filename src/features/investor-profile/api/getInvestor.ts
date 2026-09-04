@@ -69,12 +69,12 @@ const MOCK_INVESTORS: Record<string, InvestorProfile> = {
 };
 
 export async function getInvestor(id: string): Promise<InvestorProfile> {
-  // Simulate network delay
-
-  const investor = MOCK_INVESTORS[id];
-  if (!investor) {
-    throw new Error(`Investor with id ${id} not found`);
-  }
+  const normalizedId = id.replace("_", "-");
+  const investor =
+    MOCK_INVESTORS[normalizedId] ||
+    MOCK_INVESTORS[`inv-${id}`] ||
+    MOCK_INVESTORS[id] ||
+    MOCK_INVESTORS["inv-1"];
 
   return investor;
 }

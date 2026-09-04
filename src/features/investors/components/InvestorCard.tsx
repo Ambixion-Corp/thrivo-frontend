@@ -22,9 +22,11 @@ export function InvestorCard({ investor }: InvestorCardProps) {
               </div>
             </div>
             <div>
-              <h3 className="text-xl font-extrabold text-white group-hover:text-[#00C6D8] transition-colors tracking-tight">
-                {investor.firmName}
-              </h3>
+              <Link href={`/investors/${investor.id}`}>
+                <h3 className="text-xl font-extrabold text-white group-hover:text-[#00C6D8] transition-colors tracking-tight">
+                  {investor.firmName}
+                </h3>
+              </Link>
               <p className="text-sm font-bold text-zinc-500 uppercase tracking-widest mt-0.5">
                 {investor.name}
               </p>
@@ -69,7 +71,7 @@ export function InvestorCard({ investor }: InvestorCardProps) {
         </div>
 
         <Link
-          href="/messages"
+          href={`/messages/${investor.id}`}
           className="w-full rounded-full bg-white text-black py-3.5 text-sm font-extrabold flex items-center justify-center gap-2 hover:bg-gradient-to-r hover:from-[#00C6D8] hover:to-[#8DEE5F] hover:shadow-[0_0_20px_rgba(0,198,216,0.4)] hover:text-black transition-all duration-300 active:scale-95 group/btn"
         >
           <Send className="h-4 w-4 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" />

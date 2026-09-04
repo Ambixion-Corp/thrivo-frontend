@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.6](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.5...temp-app-v0.1.6) (2026-09-04)
+
+
+### Bug Fixes
+
+* **features:** connect settings layout, investor directory, product showcase, and auth persistence ([#56](https://github.com/Ambixion-Corp/thrivo-frontend/issues/56)) ([d3c612e](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d3c612e22384cf5a5b51f10ab0c267d7c7b3e061))
+* **navigation:** repair dataroom negotiation 404, multi-step pitch creation, and blank founder tab ([#55](https://github.com/Ambixion-Corp/thrivo-frontend/issues/55)) ([c676f28](https://github.com/Ambixion-Corp/thrivo-frontend/commit/c676f283d6d400879b85dbde96f8320cd00f66a7))
+
+
+### Build System
+
+* **deps-dev:** bump @types/node from 26.2.0 to 26.4.0 ([#49](https://github.com/Ambixion-Corp/thrivo-frontend/issues/49)) ([d6c496d](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d6c496dfbc2efb113001c4bc07c52721ea3bb3cc))
+* **deps-dev:** bump lint-staged from 17.3.0 to 17.4.1 ([#52](https://github.com/Ambixion-Corp/thrivo-frontend/issues/52)) ([e200870](https://github.com/Ambixion-Corp/thrivo-frontend/commit/e2008705bf40d067ff61b30b153ed48d233caa05))
+* **deps:** bump framer-motion from 12.42.2 to 13.1.1 ([#51](https://github.com/Ambixion-Corp/thrivo-frontend/issues/51)) ([192291b](https://github.com/Ambixion-Corp/thrivo-frontend/commit/192291b3f20f6343cf726005f8a76f2466417a93))
+* **deps:** bump github/codeql-action from 4.37.8 to 4.37.9 ([#54](https://github.com/Ambixion-Corp/thrivo-frontend/issues/54)) ([f946c74](https://github.com/Ambixion-Corp/thrivo-frontend/commit/f946c740c0f1a784f082729aaa417c2360bc964b))
+* **deps:** bump next from 16.3.2 to 16.3.3 ([#50](https://github.com/Ambixion-Corp/thrivo-frontend/issues/50)) ([22dd359](https://github.com/Ambixion-Corp/thrivo-frontend/commit/22dd359483a82bf49af983edaf33fc5605ac955f))
+
 ## [0.1.5](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.4...temp-app-v0.1.5) (2026-09-01)
 
 

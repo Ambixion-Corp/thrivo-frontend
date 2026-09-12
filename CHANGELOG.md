@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.7](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.6...temp-app-v0.1.7) (2026-09-12)
+
+
+### Build System
+
+* **deps-dev:** bump @types/node from 26.4.0 to 26.4.1 ([#60](https://github.com/Ambixion-Corp/thrivo-frontend/issues/60)) ([4a14f5e](https://github.com/Ambixion-Corp/thrivo-frontend/commit/4a14f5ee7787dc87528419b5e423bd423ef41ff3))
+* **deps-dev:** bump eslint-config-next from 16.3.2 to 16.3.4 ([#61](https://github.com/Ambixion-Corp/thrivo-frontend/issues/61)) ([4857eb7](https://github.com/Ambixion-Corp/thrivo-frontend/commit/4857eb70f04924307029cdac872898cd6ede98f8))
+* **deps:** bump shadcn from 4.13.1 to 4.21.0 ([#63](https://github.com/Ambixion-Corp/thrivo-frontend/issues/63)) ([d0b7d18](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d0b7d18163b5ba86066b4aa6ca0d2e0007189f11))
+* **deps:** bump zustand from 5.0.14 to 5.0.15 ([#62](https://github.com/Ambixion-Corp/thrivo-frontend/issues/62)) ([d454e39](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d454e39f95421e5709cfab7e374a2e700e37c50c))
+
 ## [0.1.6](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.5...temp-app-v0.1.6) (2026-09-04)
 
 

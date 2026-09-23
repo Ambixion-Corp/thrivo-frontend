@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.8](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.7...temp-app-v0.1.8) (2026-09-23)
+
+
+### Build System
+
+* **deps-dev:** bump eslint-config-next from 16.3.4 to 16.3.5 ([#67](https://github.com/Ambixion-Corp/thrivo-frontend/issues/67)) ([a79cc74](https://github.com/Ambixion-Corp/thrivo-frontend/commit/a79cc74a00fca58c51727169956ff7a761fcf81a))
+* **deps:** bump @supabase/supabase-js from 2.112.3 to 2.116.0 ([#66](https://github.com/Ambixion-Corp/thrivo-frontend/issues/66)) ([0a9ef1a](https://github.com/Ambixion-Corp/thrivo-frontend/commit/0a9ef1a8eea75e0fb37c41a3475d396595b1ef4a))
+* **deps:** bump @tanstack/react-query from 5.101.4 to 5.102.8 ([#68](https://github.com/Ambixion-Corp/thrivo-frontend/issues/68)) ([d1a268f](https://github.com/Ambixion-Corp/thrivo-frontend/commit/d1a268fc3652a39626455d9ea3737c34451e0a20))
+* **deps:** bump github/codeql-action from 4.37.9 to 4.38.1 ([#71](https://github.com/Ambixion-Corp/thrivo-frontend/issues/71)) ([80ca82a](https://github.com/Ambixion-Corp/thrivo-frontend/commit/80ca82a9131ccc37714f420f5c60a70996981c15))
+* **deps:** bump lucide-react from 1.37.0 to 1.45.0 ([#69](https://github.com/Ambixion-Corp/thrivo-frontend/issues/69)) ([ad73fcd](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ad73fcd8285d9c5a14c6bab56e2df63a9d11f5ef))
+
 ## [0.1.7](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.6...temp-app-v0.1.7) (2026-09-12)
 
 

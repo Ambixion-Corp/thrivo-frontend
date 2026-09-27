@@ -4,6 +4,7 @@ import { MobileNav } from "@/components/layout/MobileNav";
 import { RightSidebar } from "@/components/layout/RightSidebar";
 import { SmoothScroll } from "@/providers/SmoothScroll";
 import { AuthGuard } from "@/components/auth/AuthGuard";
+import { CartDrawer } from "@/features/products/components/CartDrawer";
 
 export default function DashboardLayout({
   children,
@@ -23,6 +24,7 @@ export default function DashboardLayout({
           </div>
           <RightSidebar />
           <MobileNav />
+          <CartDrawer />
         </div>
       </SmoothScroll>
     </AuthGuard>

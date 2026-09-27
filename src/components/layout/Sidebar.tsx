@@ -13,6 +13,10 @@ import {
   PlusSquare,
   User,
 } from "lucide-react";
+import {
+  useNotificationStore,
+  selectUnreadCount,
+} from "@/store/notificationStore";
 
 const navigation = [
   { name: "Home", href: "/", icon: Home },
@@ -27,6 +31,8 @@ const navigation = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { notifications } = useNotificationStore();
+  const unreadCount = selectUnreadCount({ notifications });
 
   return (
     <div className="hidden lg:flex lg:w-64 lg:flex-col lg:sticky lg:top-0 lg:h-screen shrink-0 lg:border-r lg:border-border lg:bg-background/80 lg:backdrop-blur-md">
@@ -71,7 +77,12 @@ export function Sidebar() {
                   aria-hidden="true"
                   strokeWidth={isActive ? 2.25 : 1.75}
                 />
-                {item.name}
+                <span className="flex-1">{item.name}</span>
+                {item.name === "Notifications" && unreadCount > 0 && (
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#8DEE5F] text-[10px] font-black text-black shadow-sm">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
               </Link>
             );
           })}

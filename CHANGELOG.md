@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.9](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.8...temp-app-v0.1.9) (2026-09-29)
+
+
+### Features
+
+* **dataroom:** implement interactive digital NDA signing and document unlock simulation ([#76](https://github.com/Ambixion-Corp/thrivo-frontend/issues/76)) ([8434ff4](https://github.com/Ambixion-Corp/thrivo-frontend/commit/8434ff446bda4a5453d60a4cfde666fa12fdfc44))
+* **marketplace:** implement persistent shopping cart drawer and multi-item checkout ([#74](https://github.com/Ambixion-Corp/thrivo-frontend/issues/74)) ([a3dc15c](https://github.com/Ambixion-Corp/thrivo-frontend/commit/a3dc15c9fcc2369c2baf1f44f6764c4518023b9e))
+* **notifications:** implement dynamic notification center with ecosystem event filtering and badges ([#78](https://github.com/Ambixion-Corp/thrivo-frontend/issues/78)) ([ff36d76](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ff36d76d425c72e02bf4e9ce6126dcd226678929))
+
+
+### Build System
+
+* **deps:** bump @base-ui/react from 1.7.0 to 1.8.0 ([#82](https://github.com/Ambixion-Corp/thrivo-frontend/issues/82)) ([9292d62](https://github.com/Ambixion-Corp/thrivo-frontend/commit/9292d6283bb677eb542b7a955ef24508c2c65ab3))
+* **deps:** bump framer-motion from 13.1.1 to 13.4.4 ([#81](https://github.com/Ambixion-Corp/thrivo-frontend/issues/81)) ([b5bcdb7](https://github.com/Ambixion-Corp/thrivo-frontend/commit/b5bcdb7cdaf34f95c7be8b806a1dd80bef10c76a))
+* **deps:** bump github/codeql-action from 4.38.1 to 4.38.2 ([#83](https://github.com/Ambixion-Corp/thrivo-frontend/issues/83)) ([1f78284](https://github.com/Ambixion-Corp/thrivo-frontend/commit/1f78284746ce51e1b5f247f98577969e15885f35))
+* **deps:** bump react and @types/react ([#80](https://github.com/Ambixion-Corp/thrivo-frontend/issues/80)) ([8a6dd89](https://github.com/Ambixion-Corp/thrivo-frontend/commit/8a6dd892ff9c6d50fc1fc48acc8a3da50b856664))
+* **deps:** bump tailwind-merge from 3.6.0 to 3.7.0 ([#79](https://github.com/Ambixion-Corp/thrivo-frontend/issues/79)) ([3e28d74](https://github.com/Ambixion-Corp/thrivo-frontend/commit/3e28d74895d2af37fc66cf63c53bc381787844f7))
+
 ## [0.1.8](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.7...temp-app-v0.1.8) (2026-09-23)
 
 

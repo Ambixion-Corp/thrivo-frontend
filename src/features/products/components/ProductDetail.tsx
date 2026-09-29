@@ -14,6 +14,9 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
+import { useCartStore } from "@/store/cartStore";
+import { Plus } from "lucide-react";
+
 interface ProductDetailProps {
   product: Product;
 }
@@ -23,11 +26,28 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [selectedVariant, setSelectedVariant] = useState(
     product.variants[0]?.id || "",
   );
+  const [addedAnimation, setAddedAnimation] = useState(false);
+  const { addItem } = useCartStore();
 
   const activeVariant =
     product.variants.find((v) => v.id === selectedVariant) ||
     product.variants[0];
   const price = activeVariant ? activeVariant.price : product.basePrice;
+
+  const handleAddToCart = () => {
+    addItem({
+      productId: product.id,
+      name: product.name,
+      variantId: activeVariant?.id,
+      variantName: activeVariant?.name,
+      price: price,
+      currency: product.currency,
+      image: product.images[selectedImage] || product.images[0],
+      startupName: product.startupName,
+    });
+    setAddedAnimation(true);
+    setTimeout(() => setAddedAnimation(false), 1500);
+  };
 
   return (
     <div className="max-w-6xl mx-auto py-8 space-y-12">
@@ -139,13 +159,31 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Checkout CTA */}
           <div className="space-y-4 pt-4">
-            <Link
-              href={`/products/${product.id}/checkout`}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00C6D8] to-[#8DEE5F] text-black font-extrabold text-base flex items-center justify-center gap-2 hover:shadow-[0_0_30px_rgba(0,198,216,0.4)] transition-all active:scale-[0.99]"
-            >
-              <ShoppingBag className="w-5 h-5" /> Buy Now
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-extrabold text-sm flex items-center justify-center gap-2 border border-white/10 transition-all active:scale-[0.99]"
+              >
+                {addedAnimation ? (
+                  <>
+                    <Check className="w-4 h-4 text-[#8DEE5F]" /> Added to Cart!
+                  </>
+                ) : (
+                  <>
+                    <Plus className="w-4 h-4 text-[#00C6D8]" /> Add to Cart
+                  </>
+                )}
+              </button>
+
+              <Link
+                href={`/products/${product.id}/checkout`}
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00C6D8] to-[#8DEE5F] text-black font-extrabold text-sm flex items-center justify-center gap-2 hover:shadow-[0_0_25px_rgba(0,198,216,0.4)] transition-all active:scale-[0.99]"
+              >
+                <ShoppingBag className="w-4 h-4" /> Buy Now
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs text-zinc-400 pt-2 border-t border-zinc-800">
               <div className="flex items-center gap-2">

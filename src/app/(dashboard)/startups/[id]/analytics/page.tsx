@@ -77,12 +77,20 @@ export default function StartupAnalyticsPage() {
           </h1>
           <p className="mt-2 text-muted-foreground">{startup.oneLiner}</p>
         </div>
-        <Link
-          href={`/startups/${startup.id}/edit`}
-          className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
-        >
-          Edit profile
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/startups/${startup.id}/captable`}
+            className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
+          >
+            Cap Table
+          </Link>
+          <Link
+            href={`/startups/${startup.id}/edit`}
+            className="inline-flex items-center justify-center rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
+          >
+            Edit profile
+          </Link>
+        </div>
       </div>
 
       <section aria-labelledby="overview-heading" className="mt-10">

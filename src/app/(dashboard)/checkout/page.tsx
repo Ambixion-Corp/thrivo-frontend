@@ -6,6 +6,8 @@ import {
   selectSubtotal,
   selectTotalItems,
 } from "@/store/cartStore";
+import { useOrderStore, PlacedOrder } from "@/store/orderStore";
+import { useNotificationStore } from "@/store/notificationStore";
 import {
   ArrowLeft,
   ShieldCheck,
@@ -19,8 +21,21 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
+function generateOrderId() {
+  return `THR-${Date.now().toString().slice(-6)}`;
+}
+
+function generateTrackingNumber() {
+  return `TRV-${(Date.now() % 100000).toString().padStart(5, "0")}-US`;
+}
+
+function generateContractHash() {
+  return `0x${(Date.now().toString(16) + "89f2a781b2c4e8039d91fca2980e14c93a772b11").slice(0, 40)}`;
+}
+
 export default function MultiItemCheckoutPage() {
   const { items, clearCart } = useCartStore();
+  const { addOrder } = useOrderStore();
   const subtotal = selectSubtotal({ items } as never);
   const totalItems = selectTotalItems({ items } as never);
 
@@ -28,14 +43,57 @@ export default function MultiItemCheckoutPage() {
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [orderId, setOrderId] = useState("");
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsProcessing(true);
 
-    const generatedId = `THR-${Math.floor(100000 + Math.random() * 900000)}`;
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const fullName = (formData.get("fullName") as string) || "Alex Johnson";
+    const email =
+      (formData.get("email") as string) || "alex.johnson@example.com";
+    const phone = (formData.get("phone") as string) || "+1 (555) 019-2834";
+    const address =
+      (formData.get("address") as string) || "500 Howard Street, Suite 400";
+    const city = (formData.get("city") as string) || "San Francisco";
+    const state = (formData.get("state") as string) || "CA";
+    const zip = (formData.get("zip") as string) || "94105";
+
+    const generatedId = generateOrderId();
     setOrderId(generatedId);
 
+    const placedOrder: PlacedOrder = {
+      id: generatedId,
+      createdAt: new Date().toISOString(),
+      items: [...items],
+      subtotal,
+      tax: 0,
+      shipping: 0,
+      total: subtotal,
+      status: "Processing",
+      escrowContractId: generateContractHash(),
+      trackingNumber: generateTrackingNumber(),
+      carrier: "FedEx Express Escrow Priority",
+      shippingDetails: {
+        fullName,
+        email,
+        phone,
+        address,
+        city,
+        state,
+        zip,
+      },
+    };
+
     setTimeout(() => {
+      addOrder(placedOrder);
+      useNotificationStore.getState().addNotification({
+        category: "orders",
+        title: "Escrow Order Placed",
+        message: `Payment of $${subtotal.toLocaleString()} locked in Thrivo Escrow Protection for order #${generatedId}.`,
+        link: "/orders",
+        actorName: fullName,
+      });
       setIsProcessing(false);
       setOrderConfirmed(true);
       clearCart();
@@ -235,6 +293,7 @@ export default function MultiItemCheckoutPage() {
               </label>
               <input
                 id="fullName"
+                name="fullName"
                 required
                 type="text"
                 defaultValue="Alex Johnson"
@@ -252,6 +311,7 @@ export default function MultiItemCheckoutPage() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   required
                   type="email"
                   defaultValue="alex.johnson@example.com"
@@ -267,6 +327,7 @@ export default function MultiItemCheckoutPage() {
                 </label>
                 <input
                   id="phone"
+                  name="phone"
                   required
                   type="tel"
                   defaultValue="+1 (555) 019-2834"
@@ -284,6 +345,7 @@ export default function MultiItemCheckoutPage() {
               </label>
               <input
                 id="address"
+                name="address"
                 required
                 type="text"
                 defaultValue="500 Howard Street, Suite 400"
@@ -301,6 +363,7 @@ export default function MultiItemCheckoutPage() {
                 </label>
                 <input
                   id="city"
+                  name="city"
                   required
                   type="text"
                   defaultValue="San Francisco"
@@ -316,6 +379,7 @@ export default function MultiItemCheckoutPage() {
                 </label>
                 <input
                   id="state"
+                  name="state"
                   required
                   type="text"
                   defaultValue="CA"
@@ -331,6 +395,7 @@ export default function MultiItemCheckoutPage() {
                 </label>
                 <input
                   id="zip"
+                  name="zip"
                   required
                   type="text"
                   defaultValue="94105"

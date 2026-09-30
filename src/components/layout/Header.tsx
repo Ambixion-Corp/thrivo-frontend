@@ -5,32 +5,37 @@ import Link from "next/link";
 import { NotificationDropdown } from "./NotificationDropdown";
 import { useCartStore, selectTotalItems } from "@/store/cartStore";
 import { useAuthStore } from "@/store/authStore";
+import { useCommandPaletteStore } from "@/store/commandPaletteStore";
 
 export function Header() {
   const { isAuthenticated, user } = useAuthStore();
   const { items, openDrawer } = useCartStore();
+  const openCommandPalette = useCommandPaletteStore((s) => s.open);
   const totalItems = selectTotalItems({ items } as never);
 
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-border bg-background/80 backdrop-blur-md px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
       <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        {/* Search Bar */}
-        <form className="relative flex flex-1" action="/search" method="GET">
-          <label htmlFor="search-field" className="sr-only">
-            Search
-          </label>
+        {/* Search Bar / Quick Launcher */}
+        <button
+          type="button"
+          onClick={openCommandPalette}
+          className="relative flex flex-1 items-center text-left py-2 px-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary/40 group transition-colors my-2"
+        >
           <Search
-            className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-muted-foreground ml-2"
+            className="h-4 w-4 mr-2.5 text-muted-foreground group-hover:text-[#00C6D8] transition-colors"
             aria-hidden="true"
           />
-          <input
-            id="search-field"
-            className="block h-full w-full border-0 py-0 pl-9 pr-0 text-foreground bg-transparent placeholder:text-muted-foreground focus:ring-0 sm:text-sm"
-            placeholder="Search founders, startups, investors..."
-            type="search"
-            name="q"
-          />
-        </form>
+          <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors hidden sm:inline">
+            Quick search startups, investors, products...
+          </span>
+          <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors sm:hidden">
+            Search...
+          </span>
+          <kbd className="ml-auto hidden sm:inline-flex items-center gap-1 rounded-md border border-border bg-muted/60 px-2 py-0.5 text-[10px] font-mono font-bold text-muted-foreground">
+            ⌘K
+          </kbd>
+        </button>
 
         <div className="flex items-center gap-x-3 sm:gap-x-4 lg:gap-x-5">
           {/* Shopping Cart Button */}

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.10](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.9...temp-app-v0.1.10) (2026-10-18)
+
+
+### Features
+
+* **orders:** implement persistent order management, escrow delivery release, and invoice generation ([#87](https://github.com/Ambixion-Corp/thrivo-frontend/issues/87)) ([a1daf89](https://github.com/Ambixion-Corp/thrivo-frontend/commit/a1daf8913aff74a3ad3ac0da21c2eef7cec0a5ec))
+* **search:** implement global command palette and unified ecosystem omni-search hub ([#91](https://github.com/Ambixion-Corp/thrivo-frontend/issues/91)) ([b018e56](https://github.com/Ambixion-Corp/thrivo-frontend/commit/b018e565c088a0020e553fbf39771f4363ddc546))
+* **startups:** implement interactive cap table and equity round dilution simulation engine ([#89](https://github.com/Ambixion-Corp/thrivo-frontend/issues/89)) ([5d3631f](https://github.com/Ambixion-Corp/thrivo-frontend/commit/5d3631f6756beab4c6ae6805e5ac0385cf2f7e46))
+
+
+### Build System
+
+* **deps:** bump @supabase/ssr from 0.12.4 to 0.12.7 ([#95](https://github.com/Ambixion-Corp/thrivo-frontend/issues/95)) ([dd03434](https://github.com/Ambixion-Corp/thrivo-frontend/commit/dd034344d6479ebb04f23a0d7ca759e9c10923b6))
+* **deps:** bump @tanstack/react-query from 5.102.8 to 5.104.1 ([#96](https://github.com/Ambixion-Corp/thrivo-frontend/issues/96)) ([ca185de](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ca185dec26f010b915fac5bce5761a7617b5e9ab))
+* **deps:** bump github/codeql-action from 4.38.2 to 4.38.3 ([#97](https://github.com/Ambixion-Corp/thrivo-frontend/issues/97)) ([ae6a130](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ae6a13053aea751fdb02860bb116a1743dbfc85e))
+* **deps:** bump lucide-react from 1.45.0 to 1.51.0 ([#93](https://github.com/Ambixion-Corp/thrivo-frontend/issues/93)) ([f453fe8](https://github.com/Ambixion-Corp/thrivo-frontend/commit/f453fe8e4abea64a2c90073d28769a6f9ce955e6))
+* **deps:** bump react-dom and @types/react-dom ([#94](https://github.com/Ambixion-Corp/thrivo-frontend/issues/94)) ([eeba804](https://github.com/Ambixion-Corp/thrivo-frontend/commit/eeba804b108573de3c548feee2fc23846ffe80ae))
+
 ## [0.1.9](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.8...temp-app-v0.1.9) (2026-09-29)
 
 

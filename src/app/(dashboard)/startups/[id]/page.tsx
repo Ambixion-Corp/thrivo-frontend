@@ -57,7 +57,7 @@ export default function StartupProfilePage() {
 
   return (
     <div className="max-w-6xl mx-auto pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 pt-4">
-      <div className="mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <button
           onClick={() => router.back()}
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group font-medium"
@@ -65,6 +65,27 @@ export default function StartupProfilePage() {
           <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
           Back
         </button>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/startups/${startup.id}/analytics`}
+            className="px-3.5 py-1.5 rounded-xl bg-card border border-border text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+          >
+            Analytics
+          </Link>
+          <Link
+            href={`/startups/${startup.id}/captable`}
+            className="px-3.5 py-1.5 rounded-xl bg-[#00C6D8]/10 border border-[#00C6D8]/30 text-xs font-semibold text-[#00C6D8] hover:bg-[#00C6D8]/20 transition-colors flex items-center gap-1.5"
+          >
+            Cap Table
+          </Link>
+          <Link
+            href={`/startups/${startup.id}/dataroom`}
+            className="px-3.5 py-1.5 rounded-xl bg-card border border-border text-xs font-semibold text-foreground hover:bg-muted transition-colors"
+          >
+            Data Room
+          </Link>
+        </div>
       </div>
 
       <StartupHero startup={startup} />

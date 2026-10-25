@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.1.10](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.9...temp-app-v0.1.10) (2026-10-25)
+
+
+### Features
+
+* **orders:** implement persistent order management, escrow delivery release, and invoice generation ([#87](https://github.com/Ambixion-Corp/thrivo-frontend/issues/87)) ([a1daf89](https://github.com/Ambixion-Corp/thrivo-frontend/commit/a1daf8913aff74a3ad3ac0da21c2eef7cec0a5ec))
+* **search:** implement global command palette and unified ecosystem omni-search hub ([#91](https://github.com/Ambixion-Corp/thrivo-frontend/issues/91)) ([b018e56](https://github.com/Ambixion-Corp/thrivo-frontend/commit/b018e565c088a0020e553fbf39771f4363ddc546))
+* **startups:** implement interactive cap table and equity round dilution simulation engine ([#89](https://github.com/Ambixion-Corp/thrivo-frontend/issues/89)) ([5d3631f](https://github.com/Ambixion-Corp/thrivo-frontend/commit/5d3631f6756beab4c6ae6805e5ac0385cf2f7e46))
+
+
+### Build System
+
+* **deps-dev:** bump @types/node from 26.4.1 to 26.6.5 ([8b81cdb](https://github.com/Ambixion-Corp/thrivo-frontend/commit/8b81cdb3b126361cc895fdcf3c85ffbad32c1188))
+* **deps-dev:** bump @types/node from 26.4.1 to 26.6.5 ([cbe707f](https://github.com/Ambixion-Corp/thrivo-frontend/commit/cbe707f904195ee17a5b5ee60b977571c867cf41))
+* **deps-dev:** bump prettier from 3.9.6 to 3.9.10 ([4324b57](https://github.com/Ambixion-Corp/thrivo-frontend/commit/4324b57d4267655830e47be7ed78e641b3c7f712))
+* **deps-dev:** bump prettier from 3.9.6 to 3.9.10 ([ab456e9](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ab456e97ad8938a6faf62a67e65a2d57e06c955e))
+* **deps:** bump @base-ui/react from 1.8.0 to 1.9.0 ([e590fe9](https://github.com/Ambixion-Corp/thrivo-frontend/commit/e590fe9851174b92df80165ae443763a7e2da366))
+* **deps:** bump @base-ui/react from 1.8.0 to 1.9.0 ([87d8c79](https://github.com/Ambixion-Corp/thrivo-frontend/commit/87d8c7950e0e2f37cd6713ab486054b1ac160da2))
+* **deps:** bump @supabase/ssr from 0.12.4 to 0.12.7 ([#95](https://github.com/Ambixion-Corp/thrivo-frontend/issues/95)) ([dd03434](https://github.com/Ambixion-Corp/thrivo-frontend/commit/dd034344d6479ebb04f23a0d7ca759e9c10923b6))
+* **deps:** bump @tanstack/react-query from 5.102.8 to 5.104.1 ([#96](https://github.com/Ambixion-Corp/thrivo-frontend/issues/96)) ([ca185de](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ca185dec26f010b915fac5bce5761a7617b5e9ab))
+* **deps:** bump github/codeql-action from 4.38.2 to 4.38.3 ([#97](https://github.com/Ambixion-Corp/thrivo-frontend/issues/97)) ([ae6a130](https://github.com/Ambixion-Corp/thrivo-frontend/commit/ae6a13053aea751fdb02860bb116a1743dbfc85e))
+* **deps:** bump github/codeql-action from 4.38.3 to 4.39.0 ([7634990](https://github.com/Ambixion-Corp/thrivo-frontend/commit/76349903bc10ccc166f5f8245b52f5e01a9a0d05))
+* **deps:** bump github/codeql-action from 4.38.3 to 4.39.0 ([5c040e0](https://github.com/Ambixion-Corp/thrivo-frontend/commit/5c040e05e1693fd8ec121b31358e6750acc4bd7b))
+* **deps:** bump lucide-react from 1.45.0 to 1.51.0 ([#93](https://github.com/Ambixion-Corp/thrivo-frontend/issues/93)) ([f453fe8](https://github.com/Ambixion-Corp/thrivo-frontend/commit/f453fe8e4abea64a2c90073d28769a6f9ce955e6))
+* **deps:** bump next from 16.3.3 to 16.4.2 ([190cba8](https://github.com/Ambixion-Corp/thrivo-frontend/commit/190cba80e6fbc609f9440e05e887af33edb87085))
+* **deps:** bump next from 16.3.3 to 16.4.2 ([29de016](https://github.com/Ambixion-Corp/thrivo-frontend/commit/29de01664d354cfe5ebf9e56c7fe097da6f2b263))
+* **deps:** bump react-dom and @types/react-dom ([#94](https://github.com/Ambixion-Corp/thrivo-frontend/issues/94)) ([eeba804](https://github.com/Ambixion-Corp/thrivo-frontend/commit/eeba804b108573de3c548feee2fc23846ffe80ae))
+
 ## [0.1.9](https://github.com/Ambixion-Corp/thrivo-frontend/compare/temp-app-v0.1.8...temp-app-v0.1.9) (2026-09-29)
 
 
